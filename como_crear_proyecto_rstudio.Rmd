@@ -1,0 +1,33 @@
+---
+title: "¿Cómo crear un proyecto en RStudio?"
+author: "Agustín Alesso"
+output: html_document
+---
+
+# Uno
+
+Antes de comenzar es conveniente crear un proyecto dentro de **R Studio**. Esto permitirá organizar los archivos de datos, las salidas, los scripts, etc dentro de un directorio de trabajo (_working directory_) y volver a ellos de manera más rápida y eficiente.
+
+1. Ir a `File > New project... ` o bien el ícono `New project`.
+
+![](screenshots/new_project.png)
+
+2. Luego seleccionar `New directory` y `Empty project`
+
+![](screenshots/new_project1.png)
+
+![](screenshots/new_project2.png)
+
+3. Una vez en el cuadro de diálogo `Create new project`
+
+![](screenshots/new_project3.png)
+
+En `Directory name` ingresamos el nombre del proyecto (e.g. Est-II) que será a su vez el nombre de la carpeta que **RStudio** va a crear. 
+
+Luego en `Create project as a subdirectory of` vamos indicar **donde** queremos que **Rstudio** cree la carpeta.  Aquí hay dos opciones:
+
+- Si van a trabajar siempre en su notebook/netbook, pueden elegir una carpeta donde les convenga.
+
+- Si van a usar las máquinas del gabinete durante el práctico y luego trabajarán en su casa, puede ser convenienete crear esa carpeta en disco removible o pendrive. De este modo, cuando vienen al práctico lo traen y trabajan directamente sobre el proyecto.
+
+4. Si todo sale bien, se crea la carpeta con el nombre que indicamos y dentro de ésta un archivo con extensión `.Rproj`

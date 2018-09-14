@@ -1,0 +1,62 @@
+---
+title: "¿Cómo instalar y cargar paquetes en R?"
+author: "Agustín Alesso"
+output: html_document
+---
+
+`R` es modular, es decir, consta de un núcleo básico de programas para realizar operaciones, gráficos y análisis. Estos programas vienen incluidos en el paquete de instalación. No obstante, existe un repositorio denominado CRAN (_Comprehensive R Archive Network_) donde constantemente se van agregando nuevos paquetes para expandir las funcionalidades de `R`.
+
+Para poder acceder a estos paquetes extra, primero es necesario instalarlos en nuestro sistema y luego, cuando los necesitemos, cargarlo en el entorno de trabajo.
+
+## Instalar paquete/s
+
+La instalación de uno o más paquetes puede hacer mediante la función `install.packages()`. Esta función recibe como argumentos el o los nombres de los paquetes a instalar y es conveniente activar la opción `dependencies` de modo tal que en la misma operación `R` instale los paquetes necesarios de los cuales depende el paquete que queremos instalar.
+
+A continuación se muestra un ejemplo con los paquete `agricolae`, `multcomp`, `nortest`, `moments`, `phia`.
+
+```{r, eval = F}
+# Un solo paquete
+install.packages("agricolae", dependencies = T)
+
+# Varios paquetes
+paquetes <- c("multcomp", "agricolae", "nortest", "moments", "phia")
+install.packages(paquetes, dependencies = T)
+```
+
+En el segundo ejemplo, `paquetes` es un vector de texto que almacena los nombres de los paquetes que queremos instalar.
+
+Esta función se utiliza por única vez. 
+
+## Cargar los paquetes en el entorno
+
+Una vez instalados los paquetes, es necesarios cargarlos en el entorno o sesión de trabajo. Para eso se usa la función `library()`.
+
+```{r, eval = F}
+# Cargar el paquerte agricolae
+library(agricolae)
+```
+
+A diferencia de `install.packages()`, la carga de los paquetes es individual, es decir, debejos ejecutar `library()` por cada paquete que querramos cargar.
+
+## Remover paquetes del entorno de trabajo
+
+Si por alguna circunstancia cargamos un paquete por error y queremos removerlo del entorno de trabajo (no de nuestra máquina), es necesario usar la función `detach()`
+
+```{r, eval = F}
+# Para remover el paquete agricolae
+detach("package:agricolae", unload = T)
+```
+
+## Panel Packages de RStudio
+
+**RStudio** cuenta con un panel desde donde podemos instalar y cargar paquetes. En ambos casos **RStudio** corre las funciones `install.packages()` y `library()`.
+
+![](screenshots/packages1.png)
+
+Para instalar por primera vez los paquetes se puede utilizar el ícono _Install_ que abre el siguiente cuadro de diálogo.
+
+![](screenshots/packages2.png)
+
+Por defecto, **RStudio** buscará e instalará los paquetes desde _CRAN_. En `Packages` hay que ingresar los nombres de los paquetes separados por comas. **RStudio** ofrece la posibilidad de ir completando el nombre si no nos acordamos.
+
+Finalmente, para cargar los paquetes podemos usar el panel **Packages**, buscar el paquete que queremos y tildar la casilla.

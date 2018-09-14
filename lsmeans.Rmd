@@ -1,0 +1,43 @@
+---
+title: "¿Cómo estimar las medias, SE e IC de los tratamientos?"
+author: "Agustín Alesso"
+output: html_document
+---
+
+```{r, echo = F}
+library(knitr)
+opts_chunk$set(comment = NA)
+```
+
+En DCA vimos un procedimiento para obtener las medias de los tratamientos, así como los errores estándar e intervalos de confianza. Esto se hacía ajustando un modelo de celdas usando "- 1". Por ejemplo, usando los datos del Ejercicio 1 del TP2:
+
+```{r}
+trigo_DCA <- read.csv("trigo_variedades.csv")
+mod <- aov(rend ~ Variedad - 1, trigo_DCA)
+summary.lm(mod)
+confint(mod)
+```
+
+No obstante, esto no es aplicable cuando tenemos otro diseño que no sea DCA. Un procediminto más generalizado para obtener las medias, SE e IC se obtiene usando la función `lsmeans()` del paquete `lsmeans`.
+
+```{r}
+# Cargar paquete (instalarlo previamente si no estaba instalado)
+library(lsmeans)
+
+# Medias e IC
+lsmeans(mod, specs = "Variedad")
+```
+
+Por ejemplo, en el ejercicio 1 del TP 5.
+
+```{r}
+trigo_DCL <- read.csv("trigo_variedades_DCL.csv")
+
+trigo_DCL <- within(trigo_DCL, {
+  Fila <- as.factor(Fila)
+  Columna <- as.factor(Columna)
+})
+
+mod <- aov(rend ~ Fila+ Columna + Variedad, trigo_DCL)
+lsmeans(mod, specs = "Variedad")
+```

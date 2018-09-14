@@ -1,0 +1,38 @@
+tt, code, pre {
+   font-family: 'Monospace';
+}
+
+h1 { 
+   font-size:1.4em;
+   font-weight: bold;
+}
+
+h2 { 
+   font-size:1.2em; 
+   font-weight: bold;
+}
+
+h3 { 
+   font-size:1.0em; 
+   font-weight: bold;
+}
+
+h4 { 
+   font-size:1.0em; 
+   font-style: italic;
+}
+
+h5 { 
+   font-size:1.0em; 
+}
+
+h6 { 
+   font-size:1.0em; 
+}
+
+img {
+    border: 1px solid #ddd;
+    max-width: 80% !important;
+    height: auto !important;
+    margin: auto !important;
+}

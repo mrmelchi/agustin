@@ -1,0 +1,292 @@
+---
+title: "Introducción a `dplyr`"
+author: "Agustín Alesso"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_depth: 3
+---
+
+## ¿Qué es `dplyr`? 
+
+`dplyr` es un paquete de **R** muy potente para la exploración, transformación y resumen de datos en formato de tabla con filas (observaciones) y columnas (variables). Es un componente de un conjunto de packages llamado `tidyverse` desarrollados por [Hadley Wickham](http://hadley.nz/)  
+
+El paquete contiene un conjunto de funciones (o _verbos_) que realizan operaciones comunes para el manejo de datos tales como: filtrar filas, seleccionar columnas, re-ordenar filas, agregar o transformar columnas, resumir datos. También permite agrupar los datos facilitando la estrategia _split-apply-combine_, es decir, dividir (_split_) los datos según una variable de grupo, aplicar (_apply_) alguna transformación o resumen y combinar (_combine_) las partes para presentar los resultados.
+
+Si bien **R** base tiene funciones que realizan las mismas tareas (`split()`, `subset()`, `apply()`, `sapply()`, `lapply()`, `tapply()` and `aggregate()`), el paquete `dplyr` brinda una interface más consistente que permite trabajar de manera más facil con `data.frame` (tabla de datos) más que con vectores.
+
+## ¿Cómo conseguir `dplyr`?
+
+Para instalar por primera vez en la computadora:
+
+```{r, eval = F}
+# Solo
+install.packages("dplyr")
+
+# O junto con la familia tidyverse
+install.packages("tidyverse")
+```
+
+Lo anterior se debe realizar por única vez si el paquete no está previamente instalado en la máquina. Para usar las funciones en una sesion de trabajo hay que cargarlo con `library()`:
+
+```{r, eval = T}
+# Solo
+library("dplyr")
+
+# O junto con la familia tidyverse
+library("tidyverse")
+```
+
+**R** va a avisarnos en la consola que esta enmascarando (reemplazando) algunas funciones que ya estaban en el entorno, o bien el paquete nos devuelve algun mensaje. A menos que diga `Error ...`, eso está bien.
+
+## Verbos importantes de `dplyr` para recordar
+
+Toda la estrategia de trabajo con datos de `dplyr` se basa en 6 verbos:
+
+verbo            descripción
+---------------- ---------------------------------------------
+`select()`	     selecciona columnas (variables)
+`filter()`	     filtra o selecciona las filas (observaciones)
+`arrange()`	     re-ordena las filas
+`mutate()`       crea nuevas columnas o modifica las preexistentes
+`summarise()`    resumen los valores de una variable
+`group_by()`     permite aplicar los verbos anteriores en subgrupos (_split-apply-combine_)
+`sample_n()`     para tomar muestras aleatorias con o sin reposición
+---------------- ---------------------------------------------
+
+En la mayoría de los casos la sintaxis es:
+
+`function(que_datos, que_hacer_con_los_datos)`
+
+En `que_datos` hay que poner el nombre del set de datos o `data.frame` (a menos que se use el operador `%>%` para encadenar, mas adelante) y en `que_hacer_con_los_datos` indicar que operación, condicion, transformacion, etc aplicar a las filas y columnas.
+
+## `dplyr` en acción
+
+Para ilustrar el uso del paquete vamos a usar los datos contenidos en el archivo `pesada_terneros.xlsx`. Para más detalles ir a la hoja de descripción de datos.
+
+```{r}
+# Cargar los datos con readxl
+library(readxl)
+terneros <- read_excel("./data/pesada_terneros.xlsx")
+```
+
+### Seleccionando variables
+
+Una tareas básicas cuando se exploran datos es la selección de columnas de interés (variables). Esto se lleva a cabo con `select()`.
+
+Para seleccionar las columnas `Procedencia`, `IDV` y `Peso`:
+
+```{r}
+# Sin asignar
+select(terneros, Procedencia, IDV, Peso)
+
+# Creando un nuevo set de datos
+mis_columnas <- select(terneros, Procedencia, IDV, Peso)
+```
+
+Por defecto, si no se asigna a un nuevo objeto, el resultado de la operación se imprime en la consola con la función `print()` la cual por defecto muestra las 10 primeras observaciones y la cantidad de columnas que entran en la pantalla. Aquellas columnas que no entran son indicadas al pie.
+
+Si quiero ver más registros se puede usar el argumento `n = ` de `print()`
+
+```{r}
+print(mis_columnas, n = 15)
+```
+
+Con `n = "all"` se imprimen todas (no se muestra por razones obvias)
+
+El orden en que aparecen las variables en el resultado es el orden que se utilizó al seleccionarlas.
+
+```{r}
+# El orden altera el producto
+select(terneros, Procedencia, IDV, Peso)
+```
+
+También se puede usar los comnados `starts_with()`, `ends_with()`, `contains()`, etc (ver `?select_helpers)` para más opciones). Para elegir varias columnas que tienen un patron sin tener que tipear todos los nombres.
+
+```{r}
+# Selecciona columnas que empiezan con P
+select(terneros, starts_with("P"))
+```
+
+Para omitir algunas columnas en la seleccion se puede usar el `-` antes del nombre.
+
+```{r}
+# Selecciona columnas que empiezan con P
+select(terneros, -IDV, -starts_with("P"))
+```
+
+### Seleccionando observaciones
+
+Otra tarea muy frecuente es seleccionar casos o observaciones que cumplan con alguna condición. Esto se lleva a cabo con `filter()`. Se pueden usar los operadores _booleanos_ `==`, `>`, `<`, `>=`, `<=`, `!=`, `%in%`) para crear pruebas o condiciones lógicas.
+
+Para seleccionar los terneros de `Los Corralitos`:
+
+```{r}
+# Sin asignar
+filter(terneros, Procedencia == 'Los Corralitos')
+
+# Creando un nuevo set de datos
+corralitos <- filter(terneros, Procedencia == 'Los Corralitos')
+```
+
+La seleccion se puede hacer por más de una condicion. Por ejemplo, seleccionar los de `Los Corralitos` que pesen más de 200 kg:
+
+```{r}
+filter(terneros, Procedencia == 'Los Corralitos', Peso > 200)
+```
+ 
+`filter()` asume que cada condicion se debe cumplir en simultaneo para que la observación sea seleccionada. Esto equivale a utilizar el operador `&` (_Y_). En caso de querer seleccionar aquellos registros que cumple una u otra condicion se usa el operador `|` (_O_). Poniendo `!` delante de la condicion se invierte la selección.
+
+```{r}
+# Operador &
+filter(terneros, Procedencia == 'Los Corralitos' & Peso > 200)
+
+# Operador |
+filter(terneros, Procedencia == 'Los Corralitos' | Peso > 200)
+```
+
+Con el operador `%in%` se puede especificar un rango de valores que deben cumplir. Por ejemplo terneros de `Los Corralitos`, `Las Glicinas` y `Don Alberto`
+
+```{r}
+# Indicando cada nombre
+filter(terneros, Procedencia == 'Los Corralitos', Procedencia == 'Las Glicinas', Procedencia == 'Don Alberto')
+
+# Más resumido con %in%
+filter(terneros, Procedencia %in% c('Los Corralitos', 'Las Glicinas', 'Don Alberto'))
+```
+
+### Encadenando operaciones (operador `%>%`)
+
+`dplyr` importa el operador `%>%` de otro paquete llamado `magrittr`. Este operador permite encadenar operaciones realizadas con los verbos. De este modo no hay que ir creando tablas intermedias o anidar funciones. El operador traduce como `luego` y se le de izquierda a derecha y se puede. 
+
+Ejemplo: Reportar los IDV y peso de los terneros con más de 250 kg. Esto implicaría seleccionar las columnas de interés y luego filtrar la tabla o vice versa.
+
+```{r}
+# Creando tablas intermedias
+terneros2 <- select(terneros, IDV, Peso)
+terneros2
+terneros2 <- filter(terneros2, Peso > 250)
+terneros2
+
+# Anidando
+filter(select(terneros, IDV, Peso), Peso > 250)
+
+# Usando %>%
+terneros %>%
+  select(IDV, Peso) %>%
+  filter(Peso >  250)
+```
+
+Con `%>%` se puede omitir el nombre de la tabla sobre la que se está trabajando (bonus: menos tipeo). 
+
+La última opción se lee: _tomar la tabla `terneros`, **luego** seleccionar las columnas `IDV` y `Peso`, **luego** filtrar los terneros con pesos mayores a 250 kg. 
+
+El operador de encadenamiento es muy útil cuando se encadenan muchas operaciones.
+
+
+### Ordenar las filas
+
+Para ordenar según algun criterio aplicado a las columnas se usa  `arrange()`. Por ejemplo, continuar con lo anterior pero mostrar ordenadospor peso.
+
+```{r}
+# Ordenar de menor a mayor
+terneros %>%
+  select(IDV, Peso) %>%
+  filter(Peso >  250) %>%
+  arrange(Peso)
+```
+
+Con `decs(variable)` se ordena de mayor a menor
+
+```{r}
+# Ordenar de mayor a menor
+terneros %>%
+  select(IDV, Peso) %>%
+  filter(Peso >  250) %>%
+  arrange(desc(Peso))
+```
+
+### Crear o transformar columnas
+
+Para crear nuevas columnas aplicando funciones a otras, o bien para transformar columnas se usa `mutate()`. Se pueden modificar más de una columna a la vez. Por ejemplo, suponiendo que interesa obtener el logaritmo natura de los pesos o elevar los pesos al cuadrado. 
+
+```{r}
+terneros %>% 
+  mutate(log_peso = log(Peso), peso2 = Peso**2) %>%
+  select(Peso, log_peso, peso2)                        # para que se vea mejor el resultado 
+```
+
+Esto no cambia el set de datos `terneros` ya que no se lo asignó a ningun objeto. Para sobreescribir o actualiza el set de datos `terneros` hay que asignarlo al mismo objeto.
+
+```{r}
+terneros <- terneros %>% 
+  mutate(log_peso = log(Peso), peso2 = Peso**2)
+```
+
+Aclaración: Si se hubiese usado `select()` el set de datos terneros solamente contendría las columnas seleccionadas.
+
+Otro ejemplo más útil: calcular los z-scores de los peso (para ello se requiere calcular el promedio y desvio) y crear una columna que indique si es un outlier y luego reportar los que son outliers.
+
+```{r}
+terneros %>% 
+  mutate(z = (Peso - mean(Peso))/sd(Peso), outlier = ifelse(abs(z) > 3, "si", "no")) %>%
+  filter(outlier == "si") %>%
+  select(IDV)
+```
+
+### Resmuir datos
+
+Mediante `summarise()` se pueden aplicar funciones para resumir en un solo valor los valores de las columnas. Las funciones a aplicar deben devolver un único valor, por ejemplo `mean()`. Si usamos `summary()` esto devolverá 6 valores y dará error.
+
+```{r}
+terneros %>%
+  summarise(media = mean(Peso), sd = sd(Peso), n = n(), suma = sum(Peso), procedencias = n_distinct(Procedencia))
+```
+
+Nuevamente estos resultados pueden asignarse a otro objeto o bien encadenarse con otras operaciones.
+
+Otro ejemplo, obtener la cantidad de terneros de cada procedencia
+
+```{r}
+terneros %>%
+  group_by(Procedencia) %>%
+  count()
+```
+
+Otro ejemplo más, cantidad de terneros de cada procedencia separados en mayor o menor a 200 kg
+
+```{r}
+terneros %>%
+  group_by(Procedencia, Peso > 200) %>%
+  count()
+```
+
+### Agrupar (último pero no menos importante)
+
+El verbo `group_by()` es muy útil para aplicar operaciones en subgrupos y presentar todo junto (_split-apply-combine_). Lo que hace es indicar que en el `data.frame` hay una o más variables que conforman los grupos. Luego cada operación se aplica a esos subgrupos.
+
+Ejemplo: calcular media, desvio, n y suma para cada procedencia.
+
+```{r}
+terneros %>%
+  group_by(Procedencia) %>%
+  summarise(media = mean(Peso), sd = sd(Peso), n = n(), suma = sum(Peso))
+```
+
+### Muestrear
+
+El verbo `sample_n()` and `sample_frac()` son útiles para tomar muestras aleatorias (con o sin reposición)  de un conjunto de observaciones. También se puede hacer por subgrupo!
+
+```{r}
+# Una muestra de 50 novillos
+muestra50 <- terneros %>%
+  sample_n(50)
+muestra50
+
+# Una muestra de 10 novillos de cada procedencia
+muestra_procedencia <- terneros %>%
+  group_by(Procedencia) %>%
+  sample_n(10)
+muestra_procedencia
+```

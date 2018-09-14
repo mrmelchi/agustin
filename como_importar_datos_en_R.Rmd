@@ -1,0 +1,72 @@
+---
+title: "¿Cómo importar datos en R?"
+author: "Agustín Alesso"
+output: html_document
+---
+
+Los datos se pueden almacenar en diversos formatos. Los más comunes son archivos de texto (\*.txt, \*.dat, etc) o texto separado por comas (\*.csv), o bien en planillas de cálculos (\*.xls o \*.xlsx). `R` cuenta con on asistente de importación de datos (`Tools > Import Dataset`) que es una interfase de la función `read.table()`. A continuación se describe como importar datos en `R`
+
+## Caso 1: archivo de texto o separado por comas
+
+Supongamos que tenemos el archivo de texto `prueba.txt`. La función `read.table()` permite leer archivos de texto que tienen datos en formato de tabla (e.g. variables en columnas y observaciones en filas) y devolver un `data.frame`. En `?read.table` se detallan todos los argumentos. Los más importantes son:
+
+- `header` para indicar si las columnas tienene encabezados que deben ser usados como nombre de las variables.
+
+- `sep` para indicar el separador de columnas
+
+- `dec` para indicar el simbolo decimal
+
+Dependiendo de las combinaciones de estos 3 argumentos hay variantes (`read.csv()`, `read.csv2()`, `read.delim()`, `read.delim2()`) que son atajos de `read.table()` (ver ayuda) 
+
+Mediante algun editor de textos (puede ser dentro de RStudio) conviene abrir el archivo y examinarlo para determinar:
+
+- Tiene encabezados?
+- Cómo están separadas las columnas?
+- Cuál es el símbolo del decimal?
+
+Luego dentro del script armar la llamada a la función `read.table()`. Suponiendo que el archivo se llama `prueba.txt` las alternativas serían:
+
+```{r, eval = F} 
+# Con encabezados, separado por tabulaciones y el decimal es el punto
+prueba <- read.table("prueba.txt", header = T, sep = "\t", dec = ".")
+
+# Con encabezados, separado por tabulaciones y coma como decimal
+prueba <- read.table("prueba.txt", header = T, sep = "\t", dec = ",")
+
+# Con encabezados, separado comas y punto como decimal
+prueba <- read.table("prueba.txt", header = T, sep = ",", dec = ".")
+
+# Con encabezados, separado punto y coma, y con coma como punto decimal
+prueba <- read.table("prueba.txt", header = T, sep = ";", dec = ",")
+```
+
+## Caso 2: planilla de cálculo
+
+En este caso se necesita cargar un paquete adicional llamado `xlsx` que tiene la función `read.xlsx()`. Suponiendo que nuestros datos estan en la planilla `prueba.xlsx` dentro de la hoja 1.
+
+```{r, eval = F}
+# Si el paquete no esta instalado hay que instalarlo la primera vez
+install.packages("xlsx")
+
+# Una vez instalado cargarlo en memoria
+library(xlsx)
+
+# Leer los datos
+prueba <- read.xlsx("prueba.xlsx", sheetIndex = 1)
+```
+
+Alternativamente, dentro de la planilla de calculo se puede exportar la hoja como archivo CSV y usar una de las alternativas de `read.table()`
+
+## Caso 3: desde el portapapeles
+
+Una alternativa conveniente para acceder rápidamente a los datos es usando el portapapeles. Suponiendo que los datos estan en una hoja de cálculos:
+
+1. Seleccionar el rango de celdas que nos interesa incluyendo los encabezados
+
+2. Copiar en el porta papeles (CTRL + C)
+
+3. Luego en R
+
+```{r, eval = F}
+datos <- read.table("clipboard")
+```

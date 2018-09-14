@@ -1,0 +1,131 @@
+---
+title: "Introducción a `ggplot2`"
+author: "Agustín Alesso"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+## Sistemas de gráficos en **R**
+
+**R** cuenta con tres sistemas para graficar:
+
+- El básico o `base plot system`, que viene por defecto y tiene funciones para hacer gráficos simples `plot()` y otras (`hist()`, `barplot()`, `boxplot()`, etc). Usa un enfoque lienzo y lapiz donde cada capa se tiene que ir agregando una por una. El para gráficos más complejos (con subgrupos o multipanel) requiere programar más. Una desventaja es la sintaxis poco consistente.
+
+- El paquete `lattice` desarrollado por Deepayan Sarkar, que implementa graficos tipo `trellis` (multipanel). Al contraro de el paquete `base`, `lattice` tiene un sintaxis más coherente y en vez de tener un enfoque _lienzo y lápiz_, todos los componentes del gráfico se declaran en una función. muy conveniente para graficos condicionales pero complicada para combinar gráficos o hacer ajustes finos.
+
+- El paquete `ggplot2`, desarrollado por [Hadley Wickham](http://hadley.nz/), está basado en la filosofía _Gramática de gráficos_ (_grammar of graphics_). Combina los dos enfoques: _lienzo-lápiz_ y _función_. Uno provee los datos, indica que variables asignar a las estéticas (ejes, escalas, colores, símbolos) y tipo de gráfico hacer y `ggplot2` se encarga del resto. Puede ir agregando capas. Es muy potente para la exploración y visualización de datos en formato de tabla con filas (observaciones) y columnas (variables).
+
+## ¿Cómo conseguir `ggplot2`?
+
+Para instalar por primera vez en la computadora:
+
+```{r, eval = F}
+# Solo
+install.packages("ggplot2")
+
+# O junto con la familia tidyverse
+install.packages("tidyverse")
+```
+
+Lo anterior se debe realizar por única vez si el paquete no está previamente instalado en la máquina. Para usar las funciones en una sesion de trabajo hay que cargarlo con `library()`:
+
+```{r, eval = T}
+# Solo
+library("ggplot2")
+
+# O junto con la familia tidyverse
+library("tidyverse")
+```
+
+**R** va a avisarnos en la consola que esta enmascarando (reemplazando) algunas funciones que ya estaban en el entorno, o bien el paquete nos devuelve algun mensaje. A menos que diga `Error ...`, eso está bien.
+
+## Partes básicas de un gráfico
+
+Si bien es dificil resumir como trabaja `ggplot2` en un párrafo, la estrategia para graficar puede resumirse así:
+
+1. Se comienza con `ggplot()` para suministrar el set de datos y se definen. Se definen los parámetros estéticos, i.e. que variables van a los ejes, colores, escales, etc., con la `aes()`.
+
+En este caso el set de datos es `terneros` y queremos hacer un histograma. En el eje `x` vamos a indicar el `Peso` y en `relleno` vamos a indicar la `Procedencia`
+
+```{r}
+library(readxl)
+terneros <- read_excel("./data/pesada_terneros.xlsx")
+
+# Iniciar objeto
+p <- ggplot(terneros, aes(x = Peso, fill = Procedencia))
+p
+```
+
+2. Luego agregar las capas o layers con las geometrías `geom_*` que uno quiere graficar (tipo de gráfico)
+
+En este caso como es un histograma entonces `geom_histogram()` es la geometría indicada.
+
+```{r}
+# Iniciar objeto
+p <- p + geom_histogram()
+p
+```
+
+3. Si es necesario ajustar la escala de colores con `scales_`. En este caso vamos a probar un gradiente de colores con `scale_color_brewer()`.
+
+```{r}
+# Iniciar objeto
+p <- p + scale_fill_brewer("RdYlGn", type = "div")
+p
+```
+
+
+4. Suponiendo que queremos dividir en paneles se puede usar `factes_wrap()`. En este caso agregamos `Fecha` como facets.
+
+```{r}
+p <- p + facet_wrap(~ Fecha)
+p
+```
+
+5. Se puede modificar los ejes de coordenadas con las funciones de tipo `coords_()`. Por ejemplo, para ilustrar vamos a rotar el gráfico.
+
+```{r}
+p <- p + coord_flip()
+p
+```
+
+6. Por último se pueden modificar los títulos de los ejes y otros detalles como la leyenda
+
+```{r}
+p <- p + labs(x = "Peso (kg)", y = "frecuencia")
+p
+
+p <- p + guides(fill = guide_legend(title = "Procedencia"))
+p
+```
+
+## Todo en un solo paso
+
+Anteriormente fuimos agregando partes al gráfico. Una característica de `ggplot2` es que mediante `+` se pueden ir combinando los comandos.
+
+```{r}
+p <- ggplot(terneros, aes(x = Peso, fill = Procedencia)) +
+  geom_histogram() +
+  scale_fill_brewer("RdYlGn", type = "div") +
+  facet_wrap(~ Fecha) +
+  coord_flip() + 
+  labs(x = "Peso (kg)", y = "frecuencia") + 
+  guides(fill = guide_legend(title = "Procedencia"))
+p
+```
+
+O más avanzado, agregando estadísticas de resumen calculadas
+
+```{r}
+# Agregar linea representando medias por procedencia  y fecha
+library(dplyr)
+med <- terneros %>% 
+  group_by(Procedencia, Fecha) %>%
+  summarise(media = mean(Peso))
+med
+
+# Combinar en el grafico (coord_cartesian para que vuelva a horizontal)
+p + coord_cartesian() + geom_vline(data = med, aes(xintercept = media))
+```
