@@ -1,0 +1,40 @@
+#
+# DESCRIPCIÓN: Ganancia de peso en vaquillas Holstein con o sin suministro de 
+#              vitamina A
+#
+# DISEÑO: DCA
+#
+# VARIABLES: Tratamiento = grupo de vaquillas con o sin suplemento
+#              GDPV = ganancia diaria de peso vivo en (g/dia/animal)
+#
+# FUENTE: Steel and Torrie, pp. 95
+#
+"Tratamiento"	"GDPV"
+"control"	175
+"control"	132
+"control"	218
+"control"	151
+"control"	200
+"control"	219
+"control"	234
+"control"	149
+"control"	187
+"control"	123
+"control"	248
+"control"	206
+"control"	179
+"control"	206
+"vitamina A"	142
+"vitamina A"	311
+"vitamina A"	337
+"vitamina A"	262
+"vitamina A"	302
+"vitamina A"	195
+"vitamina A"	253
+"vitamina A"	199
+"vitamina A"	236
+"vitamina A"	216
+"vitamina A"	211
+"vitamina A"	176
+"vitamina A"	249
+"vitamina A"	214
