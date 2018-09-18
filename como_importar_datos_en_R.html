@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Agustín Alesso" />
+
+
+<title>¿Cómo importar datos en R?</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">¿Cómo importar datos en R?</h1>
+<h4 class="author"><em>Agustín Alesso</em></h4>
+
+</div>
+
+
+<p>Los datos se pueden almacenar en diversos formatos. Los más comunes son archivos de texto (*.txt, *.dat, etc) o texto separado por comas (*.csv), o bien en planillas de cálculos (*.xls o *.xlsx). <code>R</code> cuenta con on asistente de importación de datos (<code>Tools &gt; Import Dataset</code>) que es una interfase de la función <code>read.table()</code>. A continuación se describe como importar datos en <code>R</code></p>
+<div id="caso-1-archivo-de-texto-o-separado-por-comas" class="section level2">
+<h2>Caso 1: archivo de texto o separado por comas</h2>
+<p>Supongamos que tenemos el archivo de texto <code>prueba.txt</code>. La función <code>read.table()</code> permite leer archivos de texto que tienen datos en formato de tabla (e.g. variables en columnas y observaciones en filas) y devolver un <code>data.frame</code>. En <code>?read.table</code> se detallan todos los argumentos. Los más importantes son:</p>
+<ul>
+<li><p><code>header</code> para indicar si las columnas tienene encabezados que deben ser usados como nombre de las variables.</p></li>
+<li><p><code>sep</code> para indicar el separador de columnas</p></li>
+<li><p><code>dec</code> para indicar el simbolo decimal</p></li>
+</ul>
+<p>Dependiendo de las combinaciones de estos 3 argumentos hay variantes (<code>read.csv()</code>, <code>read.csv2()</code>, <code>read.delim()</code>, <code>read.delim2()</code>) que son atajos de <code>read.table()</code> (ver ayuda)</p>
+<p>Mediante algun editor de textos (puede ser dentro de RStudio) conviene abrir el archivo y examinarlo para determinar:</p>
+<ul>
+<li>Tiene encabezados?</li>
+<li>Cómo están separadas las columnas?</li>
+<li>Cuál es el símbolo del decimal?</li>
+</ul>
+<p>Luego dentro del script armar la llamada a la función <code>read.table()</code>. Suponiendo que el archivo se llama <code>prueba.txt</code> las alternativas serían:</p>
+<pre class="r"><code># Con encabezados, separado por tabulaciones y el decimal es el punto
+prueba &lt;- read.table(&quot;prueba.txt&quot;, header = T, sep = &quot;\t&quot;, dec = &quot;.&quot;)
+
+# Con encabezados, separado por tabulaciones y coma como decimal
+prueba &lt;- read.table(&quot;prueba.txt&quot;, header = T, sep = &quot;\t&quot;, dec = &quot;,&quot;)
+
+# Con encabezados, separado comas y punto como decimal
+prueba &lt;- read.table(&quot;prueba.txt&quot;, header = T, sep = &quot;,&quot;, dec = &quot;.&quot;)
+
+# Con encabezados, separado punto y coma, y con coma como punto decimal
+prueba &lt;- read.table(&quot;prueba.txt&quot;, header = T, sep = &quot;;&quot;, dec = &quot;,&quot;)</code></pre>
+</div>
+<div id="caso-2-planilla-de-calculo" class="section level2">
+<h2>Caso 2: planilla de cálculo</h2>
+<p>En este caso se necesita cargar un paquete adicional llamado <code>xlsx</code> que tiene la función <code>read.xlsx()</code>. Suponiendo que nuestros datos estan en la planilla <code>prueba.xlsx</code> dentro de la hoja 1.</p>
+<pre class="r"><code># Si el paquete no esta instalado hay que instalarlo la primera vez
+install.packages(&quot;xlsx&quot;)
+
+# Una vez instalado cargarlo en memoria
+library(xlsx)
+
+# Leer los datos
+prueba &lt;- read.xlsx(&quot;prueba.xlsx&quot;, sheetIndex = 1)</code></pre>
+<p>Alternativamente, dentro de la planilla de calculo se puede exportar la hoja como archivo CSV y usar una de las alternativas de <code>read.table()</code></p>
+</div>
+<div id="caso-3-desde-el-portapapeles" class="section level2">
+<h2>Caso 3: desde el portapapeles</h2>
+<p>Una alternativa conveniente para acceder rápidamente a los datos es usando el portapapeles. Suponiendo que los datos estan en una hoja de cálculos:</p>
+<ol style="list-style-type: decimal">
+<li><p>Seleccionar el rango de celdas que nos interesa incluyendo los encabezados</p></li>
+<li><p>Copiar en el porta papeles (CTRL + C)</p></li>
+<li><p>Luego en R</p></li>
+</ol>
+<pre class="r"><code>datos &lt;- read.table(&quot;clipboard&quot;)</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

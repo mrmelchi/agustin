@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Agustín Alesso" />
+
+
+<title>Introducción a ggplot2</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Introducción a <code>ggplot2</code></h1>
+<h4 class="author"><em>Agustín Alesso</em></h4>
+
+</div>
+
+
+<div id="sistemas-de-graficos-en-r" class="section level2">
+<h2>Sistemas de gráficos en <strong>R</strong></h2>
+<p><strong>R</strong> cuenta con tres sistemas para graficar:</p>
+<ul>
+<li><p>El básico o <code>base plot system</code>, que viene por defecto y tiene funciones para hacer gráficos simples <code>plot()</code> y otras (<code>hist()</code>, <code>barplot()</code>, <code>boxplot()</code>, etc). Usa un enfoque lienzo y lapiz donde cada capa se tiene que ir agregando una por una. El para gráficos más complejos (con subgrupos o multipanel) requiere programar más. Una desventaja es la sintaxis poco consistente.</p></li>
+<li><p>El paquete <code>lattice</code> desarrollado por Deepayan Sarkar, que implementa graficos tipo <code>trellis</code> (multipanel). Al contraro de el paquete <code>base</code>, <code>lattice</code> tiene un sintaxis más coherente y en vez de tener un enfoque <em>lienzo y lápiz</em>, todos los componentes del gráfico se declaran en una función. muy conveniente para graficos condicionales pero complicada para combinar gráficos o hacer ajustes finos.</p></li>
+<li><p>El paquete <code>ggplot2</code>, desarrollado por <a href="http://hadley.nz/">Hadley Wickham</a>, está basado en la filosofía <em>Gramática de gráficos</em> (<em>grammar of graphics</em>). Combina los dos enfoques: <em>lienzo-lápiz</em> y <em>función</em>. Uno provee los datos, indica que variables asignar a las estéticas (ejes, escalas, colores, símbolos) y tipo de gráfico hacer y <code>ggplot2</code> se encarga del resto. Puede ir agregando capas. Es muy potente para la exploración y visualización de datos en formato de tabla con filas (observaciones) y columnas (variables).</p></li>
+</ul>
+</div>
+<div id="como-conseguir-ggplot2" class="section level2">
+<h2>¿Cómo conseguir <code>ggplot2</code>?</h2>
+<p>Para instalar por primera vez en la computadora:</p>
+<pre class="r"><code># Solo
+install.packages(&quot;ggplot2&quot;)
+
+# O junto con la familia tidyverse
+install.packages(&quot;tidyverse&quot;)</code></pre>
+<p>Lo anterior se debe realizar por única vez si el paquete no está previamente instalado en la máquina. Para usar las funciones en una sesion de trabajo hay que cargarlo con <code>library()</code>:</p>
+<pre class="r"><code># Solo
+library(&quot;ggplot2&quot;)
+
+# O junto con la familia tidyverse
+library(&quot;tidyverse&quot;)</code></pre>
+<p><strong>R</strong> va a avisarnos en la consola que esta enmascarando (reemplazando) algunas funciones que ya estaban en el entorno, o bien el paquete nos devuelve algun mensaje. A menos que diga <code>Error ...</code>, eso está bien.</p>
+</div>
+<div id="partes-basicas-de-un-grafico" class="section level2">
+<h2>Partes básicas de un gráfico</h2>
+<p>Si bien es dificil resumir como trabaja <code>ggplot2</code> en un párrafo, la estrategia para graficar puede resumirse así:</p>
+<ol style="list-style-type: decimal">
+<li>Se comienza con <code>ggplot()</code> para suministrar el set de datos y se definen. Se definen los parámetros estéticos, i.e. que variables van a los ejes, colores, escales, etc., con la <code>aes()</code>.</li>
+</ol>
+<p>En este caso el set de datos es <code>terneros</code> y queremos hacer un histograma. En el eje <code>x</code> vamos a indicar el <code>Peso</code> y en <code>relleno</code> vamos a indicar la <code>Procedencia</code></p>
+<pre class="r"><code>library(readxl)
+terneros &lt;- read_excel(&quot;./data/pesada_terneros.xlsx&quot;)
+
+# Iniciar objeto
+p &lt;- ggplot(terneros, aes(x = Peso, fill = Procedencia))
+p</code></pre>
+<p><img src="Introducci%C3%B3n_a_ggplot2_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Luego agregar las capas o layers con las geometrías <code>geom_*</code> que uno quiere graficar (tipo de gráfico)</li>
+</ol>
+<p>En este caso como es un histograma entonces <code>geom_histogram()</code> es la geometría indicada.</p>
+<pre class="r"><code># Iniciar objeto
+p &lt;- p + geom_histogram()
+p</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="Introducci%C3%B3n_a_ggplot2_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Si es necesario ajustar la escala de colores con <code>scales_</code>. En este caso vamos a probar un gradiente de colores con <code>scale_color_brewer()</code>.</li>
+</ol>
+<pre class="r"><code># Iniciar objeto
+p &lt;- p + scale_fill_brewer(&quot;RdYlGn&quot;, type = &quot;div&quot;)
+p</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="Introducci%C3%B3n_a_ggplot2_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Suponiendo que queremos dividir en paneles se puede usar <code>factes_wrap()</code>. En este caso agregamos <code>Fecha</code> como facets.</li>
+</ol>
+<pre class="r"><code>p &lt;- p + facet_wrap(~ Fecha)
+p</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="Introducci%C3%B3n_a_ggplot2_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Se puede modificar los ejes de coordenadas con las funciones de tipo <code>coords_()</code>. Por ejemplo, para ilustrar vamos a rotar el gráfico.</li>
+</ol>
+<pre class="r"><code>p &lt;- p + coord_flip()
+p</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="Introducci%C3%B3n_a_ggplot2_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ol start="6" style="list-style-type: decimal">
+<li>Por último se pueden modificar los títulos de los ejes y otros detalles como la leyenda</li>
+</ol>
+<pre class="r"><code>p &lt;- p + labs(x = &quot;Peso (kg)&quot;, y = &quot;frecuencia&quot;)
+p</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="Introducci%C3%B3n_a_ggplot2_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>p &lt;- p + guides(fill = guide_legend(title = &quot;Procedencia&quot;))
+p</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="Introducci%C3%B3n_a_ggplot2_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+</div>
+<div id="todo-en-un-solo-paso" class="section level2">
+<h2>Todo en un solo paso</h2>
+<p>Anteriormente fuimos agregando partes al gráfico. Una característica de <code>ggplot2</code> es que mediante <code>+</code> se pueden ir combinando los comandos.</p>
+<pre class="r"><code>p &lt;- ggplot(terneros, aes(x = Peso, fill = Procedencia)) +
+  geom_histogram() +
+  scale_fill_brewer(&quot;RdYlGn&quot;, type = &quot;div&quot;) +
+  facet_wrap(~ Fecha) +
+  coord_flip() + 
+  labs(x = &quot;Peso (kg)&quot;, y = &quot;frecuencia&quot;) + 
+  guides(fill = guide_legend(title = &quot;Procedencia&quot;))
+p</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="Introducci%C3%B3n_a_ggplot2_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>O más avanzado, agregando estadísticas de resumen calculadas</p>
+<pre class="r"><code># Agregar linea representando medias por procedencia  y fecha
+library(dplyr)
+med &lt;- terneros %&gt;% 
+  group_by(Procedencia, Fecha) %&gt;%
+  summarise(media = mean(Peso))
+med</code></pre>
+<pre><code>## # A tibble: 12 x 3
+## # Groups:   Procedencia [?]
+##    Procedencia    Fecha               media
+##    &lt;chr&gt;          &lt;dttm&gt;              &lt;dbl&gt;
+##  1 Don Alberto    2017-04-20 00:00:00  179.
+##  2 La Alameda     2017-04-18 00:00:00  190.
+##  3 La Estrella    2017-04-12 00:00:00  179.
+##  4 La Rosita      2017-04-06 00:00:00  180.
+##  5 La Rosita      2017-04-10 00:00:00  182 
+##  6 La Segunda     2017-04-20 00:00:00  229.
+##  7 Las Glicinas   2017-04-09 00:00:00  163.
+##  8 Las Glicinas   2017-04-10 00:00:00  159.
+##  9 Los Corralitos 2017-04-10 00:00:00  198.
+## 10 Los Corralitos 2017-04-11 00:00:00  195.
+## 11 Los Corralitos 2017-04-12 00:00:00  200.
+## 12 Los Corralitos 2017-04-20 00:00:00  182</code></pre>
+<pre class="r"><code># Combinar en el grafico (coord_cartesian para que vuelva a horizontal)
+p + coord_cartesian() + geom_vline(data = med, aes(xintercept = media))</code></pre>
+<pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="Introducci%C3%B3n_a_ggplot2_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
