@@ -1,9 +1,6 @@
 ---
 title: "Tutoriales de R"
-output: html_document
 ---
-
-
 
 **R** es un lenguaje y entorno para el procesamiento, visualización y análisis estadístico de datos. Ha sido creado en 1993 por R. Gentleman y R. Ihaka, ambos científicos del Departamento de Estadística de la Universidad de Auckland (Nueva Zelanda). Actualmente su desarrollo y mantenimiento está a cargo del _R Core Team_. El sitio oficial del proyecto es [www.r-project.org](www.r-project.org)
 
@@ -17,10 +14,9 @@ Al igual que su antecesor S, la flexibilidad y potencia de R se basa en su inter
 
 ### Contenidos
 
-- [¿Cómo instalar R y RStudio?](https://estadistica-fca.github.com/tutoriales_R/como_instalar_R_Rstudio.html)
-- [¿Cómo instalar R y RStudio?](https://estadistica-fca.github.com/tutoriales_R/como_instalar_R_Rstudio.html)
-- [¿Cómo crear un proyecto en Rstudio?](https://estadistica-fca.github.com/tutoriales_R/como_crear_proyecto_rstudio.html)
-- [¿Cómo instalar y cargar paquetes?](https://estadistica-fca.github.com/tutoriales_R/como_instalar_y_cargar_paquetes.html)
-- [¿Cómo importar datos en R?](https://estadistica-fca.github.com/tutoriales_R/como_importar_datos_en_R.html)
-- [Introducción a dplyr](https://estadistica-fca.github.com/tutoriales_R/Introducción_a_dplyr.html)
-- [Introducción a ggplot2](https://estadistica-fca.github.com/tutoriales_R/Introducción_a_ggplot2.html)
+- [¿Cómo instalar R y RStudio?](como_instalar_R_Rstudio.html)
+- [¿Cómo crear un proyecto en Rstudio?](como_crear_proyecto_rstudio.html)
+- [¿Cómo instalar y cargar paquetes?](como_instalar_y_cargar_paquetes.html)
+- [¿Cómo importar datos en R?](como_importar_datos_en_R.html)
+- [Introducción a dplyr](introduccion_a_dplyr.html)
+- [Introducción a ggplot2](introduccion_a_ggplot2.html)
