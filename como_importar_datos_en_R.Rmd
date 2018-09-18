@@ -4,9 +4,40 @@ author: "Agustín Alesso"
 output: html_document
 ---
 
-Los datos se pueden almacenar en diversos formatos. Los más comunes son archivos de texto (\*.txt, \*.dat, etc) o texto separado por comas (\*.csv), o bien en planillas de cálculos (\*.xls o \*.xlsx). `R` cuenta con on asistente de importación de datos (`Tools > Import Dataset`) que es una interfase de la función `read.table()`. A continuación se describe como importar datos en `R`
+Los datos se pueden almacenar en diversos formatos. Los más comunes son archivos de texto (\*.txt, \*.dat, etc) o texto separado por comas (\*.csv), o bien en planillas de cálculos (\*.xls o \*.xlsx). Existen diversas funciones que vienen por defecto en **R** o bien en paquetes específicos que permiten leer virtualmente cualquier formato de archivos. 
 
-## Caso 1: archivo de texto o separado por comas
+**RStudio** cuenta con un asistente de importación de datos (`File > Import Dataset`) que brinda interfase a varias funciones especializadas en la importación de datos de paquetes específicos como `readr`, `readxl`, etc. No obstante es conveniente destinar un par de lineas en nuestro script para declarar de donde vienen los datos. 
+
+## Desde el importador de datos de RStudio (`Import Dataset`)
+
+En el menu `File > Import Dataset` o bien el ícono del panel `Environment` despliega una lista con disitintas opciones de importación:
+
+1. `From text (base)...` para importar datos desde archivos de texto usando las funciones `read.table()` y relacionadas del paquete `base` de **R**.
+2. `From text (readr)...` para importar datos desde archivos de texto usando las funciones `read_table()` y relacionadas del paquete `readr`.
+3. `From Excel (readxl)...` para importar datos desde planillas de cáclulo MS Excel usando el paquete `readxl`.
+4. `From SPSS/SAS/Stata...` para importar datos desde archivos de otros paquetes estadísicos `SPSS/SAS/Stata` usando el paquete `heaven`.
+
+A continuación se detalla el cuadro de diálogo de la alternativa `From Excel` el cual es similar a 2, 3 y 4.
+
+```{r, echo = F, out.width = "75%", fig.align = 'center', fig.pos= 'h', out.extra='', fig.cap="Importador de datos"}
+include_graphics("images/import_dataset_menu.png", auto_pdf = T)
+```
+
+Este menu tiene cuatro paneles:
+
+1. Una barra de direccion para indicar la ruta al archivo o URL.
+
+2. Una vista previa del contenido del archivo
+
+3. Opciones de importación: aquí se puede especificar el nombre del objeto que se creará dentro de **R** (`Name`), la cantidad de lineas a leer, el número de la hoja, el rango de celdas, líneas a saltear (`skip`) y el identificador de datos `NA`.
+
+4. Vista previa del código. En esta parte se puede visualizar como se construye el comando que se ejecturará al clickear en `Import`.
+
+**Aclaración**: es muy importante que el código generado por este asistente sea incluido en el script para futuras seciones.
+
+## Desde la consola
+
+### Archivo de texto o separado por comas
 
 Supongamos que tenemos el archivo de texto `prueba.txt`. La función `read.table()` permite leer archivos de texto que tienen datos en formato de tabla (e.g. variables en columnas y observaciones en filas) y devolver un `data.frame`. En `?read.table` se detallan todos los argumentos. Los más importantes son:
 
@@ -40,24 +71,24 @@ prueba <- read.table("prueba.txt", header = T, sep = ",", dec = ".")
 prueba <- read.table("prueba.txt", header = T, sep = ";", dec = ",")
 ```
 
-## Caso 2: planilla de cálculo
+### Planilla de cálculo Excel
 
-En este caso se necesita cargar un paquete adicional llamado `xlsx` que tiene la función `read.xlsx()`. Suponiendo que nuestros datos estan en la planilla `prueba.xlsx` dentro de la hoja 1.
+En este caso se necesita cargar un paquete adicional llamado `readxl` que tiene la función `read_excel()`. Suponiendo que nuestros datos estan en la planilla `prueba.xlsx` dentro de la hoja 1 y el rango de celdas `A1:B10`.
 
 ```{r, eval = F}
 # Si el paquete no esta instalado hay que instalarlo la primera vez
-install.packages("xlsx")
+install.packages("readxl")
 
 # Una vez instalado cargarlo en memoria
-library(xlsx)
+library(readxl)
 
 # Leer los datos
-prueba <- read.xlsx("prueba.xlsx", sheetIndex = 1)
+prueba <- read_excel("prueba.xlsx", sheet = 1, range = "A1:B10")
 ```
 
 Alternativamente, dentro de la planilla de calculo se puede exportar la hoja como archivo CSV y usar una de las alternativas de `read.table()`
 
-## Caso 3: desde el portapapeles
+## Desde el portapapeles
 
 Una alternativa conveniente para acceder rápidamente a los datos es usando el portapapeles. Suponiendo que los datos estan en una hoja de cálculos:
 
@@ -70,3 +101,5 @@ Una alternativa conveniente para acceder rápidamente a los datos es usando el p
 ```{r, eval = F}
 datos <- read.table("clipboard")
 ```
+
+**Aclaración**: si bien esta alternativa es rápida, al no ser reproducible (no hay forma de plasmarla en el script para futuras seciones), no es recomendable.

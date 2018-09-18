@@ -3,4 +3,24 @@ title: "Tutoriales de R"
 output: html_document
 ---
 
-En Este esun sitio web sobre tutoriales en español para realizar análisis estadísticos en R
+
+
+**R** es un lenguaje y entorno para el procesamiento, visualización y análisis estadístico de datos. Ha sido creado en 1993 por R. Gentleman y R. Ihaka, ambos científicos del Departamento de Estadística de la Universidad de Auckland (Nueva Zelanda). Actualmente su desarrollo y mantenimiento está a cargo del _R Core Team_. El sitio oficial del proyecto es [www.r-project.org](www.r-project.org)
+
+```{r, echo = F, fig.cap = 'Página oficial de R Project', out.width = '50%', fig.align = 'center', fig.pos= 'h', out.extra=''} 
+include_graphics('images/rproject.png', auto_pdf = T)
+```
+
+Hoy en día, R es la _lingua franca_ del procesamiento y análisis de datos, tanto en el ámbito académico como comercial dado que es gratiuto, multiplataforma, de código abierto (_open source_, liberado con licencia GNU/GPL). Esto y el ecosistema de paquetes contribuidos por la comunidad de usuarios lo convierte en un software muy potente ya que expresa el estado del arte de los métodos estadísticos. 
+
+Al igual que su antecesor S, la flexibilidad y potencia de R se basa en su interfaz de comandos (CLI, del inglés _command line interface_ ) que permite la ejecución de comandos de manera interactiva (en consola) o estructurada mediante scritps. Esta característica impone una [curva de aprendizaje](https://es.wikipedia.org/wiki/Curva_de_aprendizaje) lenta. Con el objetivo de acelerar el aprendizaje se ha diseñado este sitio web con orientado a estudiantes de Estadísica 1 y 2 de la carrera de Ingenieria Agronómica de la Facultad de Ciencias Agrarias (Universidad Nacional del Litoral).
+
+### Contenidos
+
+- [¿Cómo instalar R y RStudio?](https://estadistica-fca.github.com/tutoriales_R/como_instalar_R_Rstudio.html)
+- [¿Cómo instalar R y RStudio?](https://estadistica-fca.github.com/tutoriales_R/como_instalar_R_Rstudio.html)
+- [¿Cómo crear un proyecto en Rstudio?](https://estadistica-fca.github.com/tutoriales_R/como_crear_proyecto_rstudio.html)
+- [¿Cómo instalar y cargar paquetes?](https://estadistica-fca.github.com/tutoriales_R/como_instalar_y_cargar_paquetes.html)
+- [¿Cómo importar datos en R?](https://estadistica-fca.github.com/tutoriales_R/como_importar_datos_en_R.html)
+- [Introducción a dplyr](https://estadistica-fca.github.com/tutoriales_R/Introducción_a_dplyr.html)
+- [Introducción a ggplot2](https://estadistica-fca.github.com/tutoriales_R/Introducción_a_ggplot2.html)

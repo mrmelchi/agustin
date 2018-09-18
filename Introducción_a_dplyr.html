@@ -9,7 +9,6 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Agustín Alesso" />
 
 
 <title>Introducción a dplyr</title>
@@ -283,17 +282,7 @@ div.tocify {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">
-    <span class="fa fa-home"></span>
-     
-    Home
-  </a>
-</li>
-<li>
-  <a href="about.html">por Agustín Alesso</a>
-</li>
-<li class="dropdown">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-book"></span>
      
@@ -303,29 +292,29 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="como_crear_proyecto_rstudio.html">¿Cómo crear un proyecto en Rstudio?</a>
+      <a href="como_instalar_R_Rstudio.html">¿Cómo instalar R y RStudio?</a>
     </li>
     <li>
-      <a href="como_importar_datos_en_R.html">¿Cómo importar datos en R?</a>
+      <a href="como_crear_proyecto_rstudio.html">¿Cómo crear un proyecto en Rstudio?</a>
     </li>
     <li>
       <a href="como_instalar_y_cargar_paquetes.html">¿Cómo instalar y cargar paquetes?</a>
     </li>
     <li>
+      <a href="como_importar_datos_en_R.html">¿Cómo importar datos en R?</a>
+    </li>
+    <li>
       <a href="Introducción_a_dplyr.html">Introducción a dplyr</a>
     </li>
     <li>
-      <a href="Introducción_a_dplyr.html">Introducción a ggplot2</a>
+      <a href="Introducción_a_ggplot2.html">Introducción a ggplot2</a>
     </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://example.com">
-    <span class="fa fa-question fa-lg"></span>
-     
-  </a>
+  <a href="about.html">por Agustín Alesso</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -337,7 +326,6 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Introducción a <code>dplyr</code></h1>
-<h4 class="author"><em>Agustín Alesso</em></h4>
 
 </div>
 
@@ -426,7 +414,7 @@ library(&quot;tidyverse&quot;)</code></pre>
 </div>
 <div id="dplyr-en-accion" class="section level2">
 <h2><code>dplyr</code> en acción</h2>
-<p>Para ilustrar el uso del paquete vamos a usar los datos contenidos en el archivo <code>pesada_terneros.xlsx</code>. Para más detalles ir a la hoja de descripción de datos.</p>
+<p>Para ilustrar el uso del paquete vamos a usar los datos contenidos en el archivo <a href="https://github.com/Estadistica-FCA/tutoriales_R/raw/master/data/pesada_terneros.xlsx"><code>pesada_terneros.xlsx</code></a>. Para más detalles ir a la hoja de descripción de datos.</p>
 <pre class="r"><code># Cargar los datos con readxl
 library(readxl)
 terneros &lt;- read_excel(&quot;./data/pesada_terneros.xlsx&quot;)</code></pre>
@@ -856,16 +844,16 @@ muestra50</code></pre>
 <pre><code>## # A tibble: 50 x 10
 ##    IDV   Procedencia Sexo  `Fecha Ingreso`     Categoria
 ##    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;dttm&gt;              &lt;chr&gt;    
-##  1 NS50… Los Corral… Macho 2017-07-20 00:00:00 Ternero  
-##  2 SZ20… Las Glicin… Macho 2017-07-24 00:00:00 Ternero  
-##  3 IY73… La Rosita   Macho 2017-07-20 00:00:00 Ternero  
-##  4 SZ20… Las Glicin… Macho 2017-07-24 00:00:00 Ternero  
-##  5 SZ20… Las Glicin… Macho 2017-07-21 00:00:00 Ternero  
-##  6 PO15… Los Corral… Macho 2017-07-24 00:00:00 Ternero  
-##  7 IA67… La Segunda  Macho 2017-07-24 00:00:00 Ternero  
-##  8 SZ20… Las Glicin… Macho 2017-07-21 00:00:00 Ternero  
-##  9 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
-## 10 SZ20… Las Glicin… Macho 2017-07-24 00:00:00 Ternero  
+##  1 SZ20… Las Glicin… Macho 2017-07-24 00:00:00 Ternero  
+##  2 PO15… Los Corral… Macho 2017-06-07 00:00:00 Ternero  
+##  3 OH87… La Alameda  Macho 2017-07-23 00:00:00 Ternero  
+##  4 PO15… Los Corral… Macho 2017-06-07 00:00:00 Ternero  
+##  5 NS50… Los Corral… Macho 2017-07-23 00:00:00 Ternero  
+##  6 PO15… Los Corral… Macho 2017-07-21 00:00:00 Ternero  
+##  7 PO15… Los Corral… Macho 2017-07-22 00:00:00 Ternero  
+##  8 NO13… Las Glicin… Macho 2017-07-21 00:00:00 Ternero  
+##  9 SZ20… Las Glicin… Macho 2017-07-21 00:00:00 Ternero  
+## 10 PO15… Los Corral… Macho 2017-06-07 00:00:00 Ternero  
 ## # ... with 40 more rows, and 5 more variables: Fecha &lt;dttm&gt;, Hora &lt;dttm&gt;,
 ## #   Peso &lt;dbl&gt;, log_peso &lt;dbl&gt;, peso2 &lt;dbl&gt;</code></pre>
 <pre class="r"><code># Una muestra de 10 novillos de cada procedencia
@@ -877,16 +865,16 @@ muestra_procedencia</code></pre>
 ## # Groups:   Procedencia [7]
 ##    IDV   Procedencia Sexo  `Fecha Ingreso`     Categoria
 ##    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;dttm&gt;              &lt;chr&gt;    
-##  1 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
-##  2 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
-##  3 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
-##  4 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
-##  5 GH73… Don Alberto Macho 2017-07-20 00:00:00 Ternero  
-##  6 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
-##  7 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
-##  8 GH73… Don Alberto Macho 2017-07-22 00:00:00 Ternero  
-##  9 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
-## 10 GH73… Don Alberto Macho 2017-07-23 00:00:00 Ternero  
+##  1 GH73… Don Alberto Macho 2017-07-23 00:00:00 Ternero  
+##  2 GH73… Don Alberto Macho 2017-07-22 00:00:00 Ternero  
+##  3 GH73… Don Alberto Macho 2017-07-23 00:00:00 Ternero  
+##  4 GH73… Don Alberto Macho 2017-07-22 00:00:00 Ternero  
+##  5 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
+##  6 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
+##  7 GH73… Don Alberto Macho 2017-07-21 00:00:00 Ternero  
+##  8 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
+##  9 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
+## 10 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
 ## # ... with 60 more rows, and 5 more variables: Fecha &lt;dttm&gt;, Hora &lt;dttm&gt;,
 ## #   Peso &lt;dbl&gt;, log_peso &lt;dbl&gt;, peso2 &lt;dbl&gt;</code></pre>
 </div>

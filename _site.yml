@@ -2,28 +2,24 @@ name: "Tutoriales R | FCA-UNL"
 navbar:
   title: "Tutoriales R"
   left:
-    - text: "Home"
-      icon: fa-home
-      href: index.html
-    - text: "por Agustín Alesso"
-      href: about.html
     - text: "Tutoriales"
       icon: fa-book
       menu:
+        - text: "¿Cómo instalar R y RStudio?"
+          href: como_instalar_R_Rstudio.html
         - text: "¿Cómo crear un proyecto en Rstudio?"
           href: como_crear_proyecto_rstudio.html
-        - text: "¿Cómo importar datos en R?"
-          href: como_importar_datos_en_R.html
         - text: "¿Cómo instalar y cargar paquetes?"
           href: como_instalar_y_cargar_paquetes.html
+        - text: "¿Cómo importar datos en R?"
+          href: como_importar_datos_en_R.html
         - text: "Introducción a dplyr"
           href: Introducción_a_dplyr.html
         - text: "Introducción a ggplot2"
-          href: Introducción_a_dplyr.html
-
+          href: Introducción_a_ggplot2.html
   right:
-    - icon: fa-question fa-lg
-      href: https://example.com
+    - text: "por Agustín Alesso"
+      href: about.html
 output:
   html_document:
     theme: paper

@@ -9,7 +9,6 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Agustín Alesso" />
 
 
 <title>¿Cómo instalar y cargar paquetes en R?</title>
@@ -185,17 +184,7 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">
-    <span class="fa fa-home"></span>
-     
-    Home
-  </a>
-</li>
-<li>
-  <a href="about.html">por Agustín Alesso</a>
-</li>
-<li class="dropdown">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-book"></span>
      
@@ -205,29 +194,29 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="como_crear_proyecto_rstudio.html">¿Cómo crear un proyecto en Rstudio?</a>
+      <a href="como_instalar_R_Rstudio.html">¿Cómo instalar R y RStudio?</a>
     </li>
     <li>
-      <a href="como_importar_datos_en_R.html">¿Cómo importar datos en R?</a>
+      <a href="como_crear_proyecto_rstudio.html">¿Cómo crear un proyecto en Rstudio?</a>
     </li>
     <li>
       <a href="como_instalar_y_cargar_paquetes.html">¿Cómo instalar y cargar paquetes?</a>
     </li>
     <li>
+      <a href="como_importar_datos_en_R.html">¿Cómo importar datos en R?</a>
+    </li>
+    <li>
       <a href="Introducción_a_dplyr.html">Introducción a dplyr</a>
     </li>
     <li>
-      <a href="Introducción_a_dplyr.html">Introducción a ggplot2</a>
+      <a href="Introducción_a_ggplot2.html">Introducción a ggplot2</a>
     </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://example.com">
-    <span class="fa fa-question fa-lg"></span>
-     
-  </a>
+  <a href="about.html">por Agustín Alesso</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -239,28 +228,27 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">¿Cómo instalar y cargar paquetes en R?</h1>
-<h4 class="author"><em>Agustín Alesso</em></h4>
 
 </div>
 
 
-<p><code>R</code> es modular, es decir, consta de un núcleo básico de programas para realizar operaciones, gráficos y análisis. Estos programas vienen incluidos en el paquete de instalación. No obstante, existe un repositorio denominado CRAN (<em>Comprehensive R Archive Network</em>) donde constantemente se van agregando nuevos paquetes para expandir las funcionalidades de <code>R</code>.</p>
-<p>Para poder acceder a estos paquetes extra, primero es necesario instalarlos en nuestro sistema y luego, cuando los necesitemos, cargarlo en el entorno de trabajo.</p>
+<p><strong>R</strong> es modular, es decir, consta de un núcleo básico de programas para realizar operaciones, gráficos y análisis. Estos programas vienen incluidos en el paquete de instalación. No obstante, existe un repositorio denominado CRAN (<em>Comprehensive R Archive Network</em>) donde constantemente se van agregando nuevos paquetes para expandir las funcionalidades de <strong>R</strong>.</p>
+<p>Para poder acceder a estos paquetes extra, primero es necesario instalarlos en nuestro sistema y luego, cuando los necesitemos, cargarlo en la sesión de trabajo.</p>
 <div id="instalar-paquetes" class="section level2">
 <h2>Instalar paquete/s</h2>
 <p>La instalación de uno o más paquetes puede hacer mediante la función <code>install.packages()</code>. Esta función recibe como argumentos el o los nombres de los paquetes a instalar y es conveniente activar la opción <code>dependencies</code> de modo tal que en la misma operación <code>R</code> instale los paquetes necesarios de los cuales depende el paquete que queremos instalar.</p>
-<p>A continuación se muestra un ejemplo con los paquete <code>agricolae</code>, <code>multcomp</code>, <code>nortest</code>, <code>moments</code>, <code>phia</code>.</p>
+<p>A continuación se muestra un ejemplo con los paquete <code>agricolae</code>, <code>emmeans</code>, <code>nortest</code>, <code>moments</code>, <code>tidyverse</code>.</p>
 <pre class="r"><code># Un solo paquete
-install.packages(&quot;agricolae&quot;, dependencies = T)
+install.packages(&quot;agricolae&quot;, dependencies = &quot;Depends&quot;)
 
 # Varios paquetes
-paquetes &lt;- c(&quot;multcomp&quot;, &quot;agricolae&quot;, &quot;nortest&quot;, &quot;moments&quot;, &quot;phia&quot;)
+paquetes &lt;- c(&quot;agricolae&quot;, &quot;emmeans&quot;, &quot;nortest&quot;, &quot;moments&quot;, &quot;tidyverse&quot;)
 install.packages(paquetes, dependencies = T)</code></pre>
 <p>En el segundo ejemplo, <code>paquetes</code> es un vector de texto que almacena los nombres de los paquetes que queremos instalar.</p>
 <p>Esta función se utiliza por única vez.</p>
 </div>
-<div id="cargar-los-paquetes-en-el-entorno" class="section level2">
-<h2>Cargar los paquetes en el entorno</h2>
+<div id="cargar-los-paquetes-en-la-sesion-de-trabajo" class="section level2">
+<h2>Cargar los paquetes en la sesión de trabajo</h2>
 <p>Una vez instalados los paquetes, es necesarios cargarlos en el entorno o sesión de trabajo. Para eso se usa la función <code>library()</code>.</p>
 <pre class="r"><code># Cargar el paquerte agricolae
 library(agricolae)</code></pre>
@@ -272,14 +260,34 @@ library(agricolae)</code></pre>
 <pre class="r"><code># Para remover el paquete agricolae
 detach(&quot;package:agricolae&quot;, unload = T)</code></pre>
 </div>
+<div id="remover-un-paquete-instalado" class="section level2">
+<h2>Remover un paquete instalado</h2>
+<p>Si por alguna circunstancia deseamos remover o eliminar un paquete previamente instalado de nuestra máquina, es necesario usar la función <code>remove.packages()</code></p>
+<pre class="r"><code># Para remover el paquete agricolae
+remove.packages(&quot;agricolae&quot;)</code></pre>
+</div>
 <div id="panel-packages-de-rstudio" class="section level2">
 <h2>Panel Packages de RStudio</h2>
 <p><strong>RStudio</strong> cuenta con un panel desde donde podemos instalar y cargar paquetes. En ambos casos <strong>RStudio</strong> corre las funciones <code>install.packages()</code> y <code>library()</code>.</p>
-<p><img src="screenshots/packages1.png" /></p>
+<div class="figure" style="text-align: center">
+<img src="images/packages1.png" alt="Panel `Packages`" width="75%"  />
+<p class="caption">
+Panel <code>Packages</code>
+</p>
+</div>
 <p>Para instalar por primera vez los paquetes se puede utilizar el ícono <em>Install</em> que abre el siguiente cuadro de diálogo.</p>
-<p><img src="screenshots/packages2.png" /></p>
+<div class="figure" style="text-align: center">
+<img src="images/packages2.png" alt="Cuadro de diálogo para instalar paquetes" width="75%"  />
+<p class="caption">
+Cuadro de diálogo para instalar paquetes
+</p>
+</div>
 <p>Por defecto, <strong>RStudio</strong> buscará e instalará los paquetes desde <em>CRAN</em>. En <code>Packages</code> hay que ingresar los nombres de los paquetes separados por comas. <strong>RStudio</strong> ofrece la posibilidad de ir completando el nombre si no nos acordamos.</p>
 <p>Finalmente, para cargar los paquetes podemos usar el panel <strong>Packages</strong>, buscar el paquete que queremos y tildar la casilla.</p>
+</div>
+<div id="library-o-panel-packages" class="section level2">
+<h2>¿<code>library()</code> o panel <code>Packages</code>?</h2>
+<p>Si bien el panel <code>Packeges</code> brinda una interfase para seleccionar y cargar los paquetes con un click, esta alternativa tiene una desventaja: hay que acordarse en futuras sesiones que es necesario cargar ese paquete. Es por eso que incluir un par de líneas en el script con la función <code>library()</code> es mejor.</p>
 </div>
 
 

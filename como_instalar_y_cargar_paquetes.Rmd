@@ -1,25 +1,24 @@
 ---
 title: "¿Cómo instalar y cargar paquetes en R?"
-author: "Agustín Alesso"
 output: html_document
 ---
 
-`R` es modular, es decir, consta de un núcleo básico de programas para realizar operaciones, gráficos y análisis. Estos programas vienen incluidos en el paquete de instalación. No obstante, existe un repositorio denominado CRAN (_Comprehensive R Archive Network_) donde constantemente se van agregando nuevos paquetes para expandir las funcionalidades de `R`.
+**R** es modular, es decir, consta de un núcleo básico de programas para realizar operaciones, gráficos y análisis. Estos programas vienen incluidos en el paquete de instalación. No obstante, existe un repositorio denominado CRAN (_Comprehensive R Archive Network_) donde constantemente se van agregando nuevos paquetes para expandir las funcionalidades de **R**.
 
-Para poder acceder a estos paquetes extra, primero es necesario instalarlos en nuestro sistema y luego, cuando los necesitemos, cargarlo en el entorno de trabajo.
+Para poder acceder a estos paquetes extra, primero es necesario instalarlos en nuestro sistema y luego, cuando los necesitemos, cargarlo en la sesión de trabajo.
 
 ## Instalar paquete/s
 
 La instalación de uno o más paquetes puede hacer mediante la función `install.packages()`. Esta función recibe como argumentos el o los nombres de los paquetes a instalar y es conveniente activar la opción `dependencies` de modo tal que en la misma operación `R` instale los paquetes necesarios de los cuales depende el paquete que queremos instalar.
 
-A continuación se muestra un ejemplo con los paquete `agricolae`, `multcomp`, `nortest`, `moments`, `phia`.
+A continuación se muestra un ejemplo con los paquete `agricolae`, `emmeans`, `nortest`, `moments`, `tidyverse`.
 
 ```{r, eval = F}
 # Un solo paquete
-install.packages("agricolae", dependencies = T)
+install.packages("agricolae", dependencies = "Depends")
 
 # Varios paquetes
-paquetes <- c("multcomp", "agricolae", "nortest", "moments", "phia")
+paquetes <- c("agricolae", "emmeans", "nortest", "moments", "tidyverse")
 install.packages(paquetes, dependencies = T)
 ```
 
@@ -27,7 +26,7 @@ En el segundo ejemplo, `paquetes` es un vector de texto que almacena los nombres
 
 Esta función se utiliza por única vez. 
 
-## Cargar los paquetes en el entorno
+## Cargar los paquetes en la sesión de trabajo
 
 Una vez instalados los paquetes, es necesarios cargarlos en el entorno o sesión de trabajo. Para eso se usa la función `library()`.
 
@@ -47,16 +46,36 @@ Si por alguna circunstancia cargamos un paquete por error y queremos removerlo d
 detach("package:agricolae", unload = T)
 ```
 
+## Remover un paquete instalado
+
+Si por alguna circunstancia deseamos remover o eliminar un paquete previamente instalado de nuestra máquina, es necesario usar la función `remove.packages()`
+
+```{r, eval = F}
+# Para remover el paquete agricolae
+remove.packages("agricolae")
+```
+
 ## Panel Packages de RStudio
 
 **RStudio** cuenta con un panel desde donde podemos instalar y cargar paquetes. En ambos casos **RStudio** corre las funciones `install.packages()` y `library()`.
 
-![](screenshots/packages1.png)
+```{r, echo = F, out.width = "75%", fig.align = 'center', fig.cap = 'Panel `Packages`', fig.pos= 'h', out.extra=''}
+knitr::include_graphics("images/packages1.png", auto_pdf = T)
+```
+
 
 Para instalar por primera vez los paquetes se puede utilizar el ícono _Install_ que abre el siguiente cuadro de diálogo.
 
-![](screenshots/packages2.png)
+```{r, echo = F, out.width = "75%", fig.align = 'center', fig.cap = 'Cuadro de diálogo para instalar paquetes', fig.pos= 'h', out.extra=''}
+knitr::include_graphics("images/packages2.png", auto_pdf = T)
+```
+
+
 
 Por defecto, **RStudio** buscará e instalará los paquetes desde _CRAN_. En `Packages` hay que ingresar los nombres de los paquetes separados por comas. **RStudio** ofrece la posibilidad de ir completando el nombre si no nos acordamos.
 
 Finalmente, para cargar los paquetes podemos usar el panel **Packages**, buscar el paquete que queremos y tildar la casilla.
+
+## ¿`library()` o panel `Packages`?
+
+Si bien el panel `Packeges` brinda una interfase para seleccionar y cargar los paquetes con un click, esta alternativa tiene una desventaja: hay que acordarse en futuras sesiones que es necesario cargar ese paquete. Es por eso que incluir un par de líneas en el script con la función  `library()` es mejor.

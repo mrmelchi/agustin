@@ -11,7 +11,7 @@
 
 
 
-<title>Tutoriales de R</title>
+<title>¿Cómo crear un proyecto en RStudio?</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -227,31 +227,74 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Tutoriales de R</h1>
+<h1 class="title toc-ignore">¿Cómo crear un proyecto en RStudio?</h1>
 
 </div>
 
 
-<p><strong>R</strong> es un lenguaje y entorno para el procesamiento, visualización y análisis estadístico de datos. Ha sido creado en 1993 por R. Gentleman y R. Ihaka, ambos científicos del Departamento de Estadística de la Universidad de Auckland (Nueva Zelanda). Actualmente su desarrollo y mantenimiento está a cargo del <em>R Core Team</em>. El sitio oficial del proyecto es <a href="www.r-project.org" class="uri">www.r-project.org</a></p>
+<div id="como-instalar-r-y-rstudio" class="section level2">
+<h2>¿Cómo instalar R y RStudio?</h2>
+<p>R y RStudio se instalan por separado. R puede funcionar sin RStudio, en cambio éste necesita que al menos una versión de R esté instalada en el sistema. Ambos softwares son multiplataforma y pueden ser ejecutados en sistemas operativos Windows, OS X y Linux. En la página <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a> hay instrucciones específicas para cada plataforma. A continuación se describe el procedimiento para instalar R y RStudio bajo Windows.</p>
+<div id="instalacion-de-r" class="section level3">
+<h3>Instalación de R</h3>
+<ol style="list-style-type: decimal">
+<li>Descargar el archivo instalador correspondiente a la última versión estable de R desde el CRAN<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> (del inglés, <em>Comprenhensive R Archive Network</em>) visitando el siguiente <a href="https://cloud.r-project.org/bin/windows/base/release.htm">link</a>.</li>
+</ol>
 <div class="figure" style="text-align: center">
-<img src="images/rproject.png" alt="Página oficial de R Project" width="50%"  />
+<img src="images/choose_OS.png" alt="Página de descaga de R" width="75%"  />
 <p class="caption">
-Página oficial de R Project
+Página de descaga de R
 </p>
 </div>
-<p>Hoy en día, R es la <em>lingua franca</em> del procesamiento y análisis de datos, tanto en el ámbito académico como comercial dado que es gratiuto, multiplataforma, de código abierto (<em>open source</em>, liberado con licencia GNU/GPL). Esto y el ecosistema de paquetes contribuidos por la comunidad de usuarios lo convierte en un software muy potente ya que expresa el estado del arte de los métodos estadísticos.</p>
-<p>Al igual que su antecesor S, la flexibilidad y potencia de R se basa en su interfaz de comandos (CLI, del inglés <em>command line interface</em> ) que permite la ejecución de comandos de manera interactiva (en consola) o estructurada mediante scritps. Esta característica impone una <a href="https://es.wikipedia.org/wiki/Curva_de_aprendizaje">curva de aprendizaje</a> lenta. Con el objetivo de acelerar el aprendizaje se ha diseñado este sitio web con orientado a estudiantes de Estadísica 1 y 2 de la carrera de Ingenieria Agronómica de la Facultad de Ciencias Agrarias (Universidad Nacional del Litoral).</p>
-<div id="contenidos" class="section level3">
-<h3>Contenidos</h3>
-<ul>
-<li><a href="https://estadistica-fca.github.com/tutoriales_R/como_instalar_R_Rstudio.html">¿Cómo instalar R y RStudio?</a></li>
-<li><a href="https://estadistica-fca.github.com/tutoriales_R/como_instalar_R_Rstudio.html">¿Cómo instalar R y RStudio?</a></li>
-<li><a href="https://estadistica-fca.github.com/tutoriales_R/como_crear_proyecto_rstudio.html">¿Cómo crear un proyecto en Rstudio?</a></li>
-<li><a href="https://estadistica-fca.github.com/tutoriales_R/como_instalar_y_cargar_paquetes.html">¿Cómo instalar y cargar paquetes?</a></li>
-<li><a href="https://estadistica-fca.github.com/tutoriales_R/como_importar_datos_en_R.html">¿Cómo importar datos en R?</a></li>
-<li><a href="https://estadistica-fca.github.com/tutoriales_R/Introducción_a_dplyr.html">Introducción a dplyr</a></li>
-<li><a href="https://estadistica-fca.github.com/tutoriales_R/Introducción_a_ggplot2.html">Introducción a ggplot2</a></li>
-</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Ejecutar el archivo descargado <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> y seguir el asistente de instalación con todas las opciones por defecto.</li>
+</ol>
+<ol start="3" style="list-style-type: decimal">
+<li>Si la instalación ha sido exitosa en el menú <em>Inicio</em> podrá encontrarse la carpeta <em>R</em> que contendrá dos accesos directos a la interfase de usuario mínima que viene con la versión de R para Windows.</li>
+</ol>
+<div class="figure" style="text-align: center">
+<img src="images/rgui.png" alt="R GUI para Windows" width="75%"  />
+<p class="caption">
+R GUI para Windows
+</p>
+</div>
+</div>
+<div id="instalacion-de-rstudio" class="section level3">
+<h3>Instalación de RStudio</h3>
+<ol style="list-style-type: decimal">
+<li>Ir al sitio web de descarga de RStudio <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a></li>
+</ol>
+<div class="figure" style="text-align: center">
+<img src="images/rstudio_download.png" alt="Página principal de RStudio" width="75%"  />
+<p class="caption">
+Página principal de RStudio
+</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>Descargar el archivo de instalación correspondiente a nuestra plataforma o sistema operativo.</li>
+</ol>
+<div class="figure" style="text-align: center">
+<img src="images/rstudio_download_OS.png" alt="Página principal de RStudio" width="75%"  />
+<p class="caption">
+Página principal de RStudio
+</p>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>Ejecutar el archivo <code>.exe</code> <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> y seguir el asistente de instalación con todas las opciones por defecto.</li>
+</ol>
+<ol start="4" style="list-style-type: decimal">
+<li>Si la instalación ha sido exitosa en el menú <em>Inicio</em> dentro de la carpeta <em>RStudio</em> se encontrará el acceso directo a RStudio el cual, mediante el menu contextual (botón derecho del ratón) puede enviarse al Escritorio como acceso directo o bien anclar al menu de Inicio o barra de acceso rápido.</li>
+</ol>
+<p>Ahora sí, ya tenemos listo R y RStudio para empezar a trabajar!!</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>CRAN se compone de un conjunto de servidores espejo distribuidos alrededor del mundo que tienen copias de R y sus paquetes. No es necesario escojer el espejo más cercano ya que el espejo nube (<a href="https://cloud.r-project.org" class="uri">https://cloud.r-project.org</a>) automáticamente determina de que servidor conviene realizar la descarga.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Al momento de escribir estas instrucciones la última versión estable de R era la 3.5.1 “Feather Spray”, por lo tanto el link apuntará al archivo <code>R-3.5.1-win.exe</code>.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Al momento de escribir estas instrucciones la última versión estable de RStudio era <code>RStudio-1.1.453.exe</code>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
 
 

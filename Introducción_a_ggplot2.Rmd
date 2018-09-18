@@ -1,6 +1,5 @@
 ---
 title: "Introducción a `ggplot2`"
-author: "Agustín Alesso"
 output: 
   html_document:
     toc: yes
@@ -40,6 +39,9 @@ library("tidyverse")
 ```
 
 **R** va a avisarnos en la consola que esta enmascarando (reemplazando) algunas funciones que ya estaban en el entorno, o bien el paquete nos devuelve algun mensaje. A menos que diga `Error ...`, eso está bien.
+
+Para ilustrar el uso del paquete vamos a usar los datos contenidos en el archivo [`pesada_terneros.xlsx`](https://github.com/Estadistica-FCA/tutoriales_R/raw/master/data/pesada_terneros.xlsx).
+
 
 ## Partes básicas de un gráfico
 

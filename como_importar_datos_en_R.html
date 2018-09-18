@@ -185,17 +185,7 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">
-    <span class="fa fa-home"></span>
-     
-    Home
-  </a>
-</li>
-<li>
-  <a href="about.html">por Agustín Alesso</a>
-</li>
-<li class="dropdown">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-book"></span>
      
@@ -205,29 +195,29 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="como_crear_proyecto_rstudio.html">¿Cómo crear un proyecto en Rstudio?</a>
+      <a href="como_instalar_R_Rstudio.html">¿Cómo instalar R y RStudio?</a>
     </li>
     <li>
-      <a href="como_importar_datos_en_R.html">¿Cómo importar datos en R?</a>
+      <a href="como_crear_proyecto_rstudio.html">¿Cómo crear un proyecto en Rstudio?</a>
     </li>
     <li>
       <a href="como_instalar_y_cargar_paquetes.html">¿Cómo instalar y cargar paquetes?</a>
     </li>
     <li>
+      <a href="como_importar_datos_en_R.html">¿Cómo importar datos en R?</a>
+    </li>
+    <li>
       <a href="Introducción_a_dplyr.html">Introducción a dplyr</a>
     </li>
     <li>
-      <a href="Introducción_a_dplyr.html">Introducción a ggplot2</a>
+      <a href="Introducción_a_ggplot2.html">Introducción a ggplot2</a>
     </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://example.com">
-    <span class="fa fa-question fa-lg"></span>
-     
-  </a>
+  <a href="about.html">por Agustín Alesso</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -244,9 +234,37 @@ $(document).ready(function () {
 </div>
 
 
-<p>Los datos se pueden almacenar en diversos formatos. Los más comunes son archivos de texto (*.txt, *.dat, etc) o texto separado por comas (*.csv), o bien en planillas de cálculos (*.xls o *.xlsx). <code>R</code> cuenta con on asistente de importación de datos (<code>Tools &gt; Import Dataset</code>) que es una interfase de la función <code>read.table()</code>. A continuación se describe como importar datos en <code>R</code></p>
-<div id="caso-1-archivo-de-texto-o-separado-por-comas" class="section level2">
-<h2>Caso 1: archivo de texto o separado por comas</h2>
+<p>Los datos se pueden almacenar en diversos formatos. Los más comunes son archivos de texto (*.txt, *.dat, etc) o texto separado por comas (*.csv), o bien en planillas de cálculos (*.xls o *.xlsx). Existen diversas funciones que vienen por defecto en <strong>R</strong> o bien en paquetes específicos que permiten leer virtualmente cualquier formato de archivos.</p>
+<p><strong>RStudio</strong> cuenta con un asistente de importación de datos (<code>File &gt; Import Dataset</code>) que brinda interfase a varias funciones especializadas en la importación de datos de paquetes específicos como <code>readr</code>, <code>readxl</code>, etc. No obstante es conveniente destinar un par de lineas en nuestro script para declarar de donde vienen los datos.</p>
+<div id="desde-el-importador-de-datos-de-rstudio-import-dataset" class="section level2">
+<h2>Desde el importador de datos de RStudio (<code>Import Dataset</code>)</h2>
+<p>En el menu <code>File &gt; Import Dataset</code> o bien el ícono del panel <code>Environment</code> despliega una lista con disitintas opciones de importación:</p>
+<ol style="list-style-type: decimal">
+<li><code>From text (base)...</code> para importar datos desde archivos de texto usando las funciones <code>read.table()</code> y relacionadas del paquete <code>base</code> de <strong>R</strong>.</li>
+<li><code>From text (readr)...</code> para importar datos desde archivos de texto usando las funciones <code>read_table()</code> y relacionadas del paquete <code>readr</code>.</li>
+<li><code>From Excel (readxl)...</code> para importar datos desde planillas de cáclulo MS Excel usando el paquete <code>readxl</code>.</li>
+<li><code>From SPSS/SAS/Stata...</code> para importar datos desde archivos de otros paquetes estadísicos <code>SPSS/SAS/Stata</code> usando el paquete <code>heaven</code>.</li>
+</ol>
+<p>A continuación se detalla el cuadro de diálogo de la alternativa <code>From Excel</code> el cual es similar a 2, 3 y 4.</p>
+<div class="figure" style="text-align: center">
+<img src="images/import_dataset_menu.png" alt="Importador de datos" width="75%"  />
+<p class="caption">
+Importador de datos
+</p>
+</div>
+<p>Este menu tiene cuatro paneles:</p>
+<ol style="list-style-type: decimal">
+<li><p>Una barra de direccion para indicar la ruta al archivo o URL.</p></li>
+<li><p>Una vista previa del contenido del archivo</p></li>
+<li><p>Opciones de importación: aquí se puede especificar el nombre del objeto que se creará dentro de <strong>R</strong> (<code>Name</code>), la cantidad de lineas a leer, el número de la hoja, el rango de celdas, líneas a saltear (<code>skip</code>) y el identificador de datos <code>NA</code>.</p></li>
+<li><p>Vista previa del código. En esta parte se puede visualizar como se construye el comando que se ejecturará al clickear en <code>Import</code>.</p></li>
+</ol>
+<p><strong>Aclaración</strong>: es muy importante que el código generado por este asistente sea incluido en el script para futuras seciones.</p>
+</div>
+<div id="desde-la-consola" class="section level2">
+<h2>Desde la consola</h2>
+<div id="archivo-de-texto-o-separado-por-comas" class="section level3">
+<h3>Archivo de texto o separado por comas</h3>
 <p>Supongamos que tenemos el archivo de texto <code>prueba.txt</code>. La función <code>read.table()</code> permite leer archivos de texto que tienen datos en formato de tabla (e.g. variables en columnas y observaciones en filas) y devolver un <code>data.frame</code>. En <code>?read.table</code> se detallan todos los argumentos. Los más importantes son:</p>
 <ul>
 <li><p><code>header</code> para indicar si las columnas tienene encabezados que deben ser usados como nombre de las variables.</p></li>
@@ -273,21 +291,22 @@ prueba &lt;- read.table(&quot;prueba.txt&quot;, header = T, sep = &quot;,&quot;,
 # Con encabezados, separado punto y coma, y con coma como punto decimal
 prueba &lt;- read.table(&quot;prueba.txt&quot;, header = T, sep = &quot;;&quot;, dec = &quot;,&quot;)</code></pre>
 </div>
-<div id="caso-2-planilla-de-calculo" class="section level2">
-<h2>Caso 2: planilla de cálculo</h2>
-<p>En este caso se necesita cargar un paquete adicional llamado <code>xlsx</code> que tiene la función <code>read.xlsx()</code>. Suponiendo que nuestros datos estan en la planilla <code>prueba.xlsx</code> dentro de la hoja 1.</p>
+<div id="planilla-de-calculo-excel" class="section level3">
+<h3>Planilla de cálculo Excel</h3>
+<p>En este caso se necesita cargar un paquete adicional llamado <code>readxl</code> que tiene la función <code>read_excel()</code>. Suponiendo que nuestros datos estan en la planilla <code>prueba.xlsx</code> dentro de la hoja 1 y el rango de celdas <code>A1:B10</code>.</p>
 <pre class="r"><code># Si el paquete no esta instalado hay que instalarlo la primera vez
-install.packages(&quot;xlsx&quot;)
+install.packages(&quot;readxl&quot;)
 
 # Una vez instalado cargarlo en memoria
-library(xlsx)
+library(readxl)
 
 # Leer los datos
-prueba &lt;- read.xlsx(&quot;prueba.xlsx&quot;, sheetIndex = 1)</code></pre>
+prueba &lt;- read_excel(&quot;prueba.xlsx&quot;, sheet = 1, range = &quot;A1:B10&quot;)</code></pre>
 <p>Alternativamente, dentro de la planilla de calculo se puede exportar la hoja como archivo CSV y usar una de las alternativas de <code>read.table()</code></p>
 </div>
-<div id="caso-3-desde-el-portapapeles" class="section level2">
-<h2>Caso 3: desde el portapapeles</h2>
+</div>
+<div id="desde-el-portapapeles" class="section level2">
+<h2>Desde el portapapeles</h2>
 <p>Una alternativa conveniente para acceder rápidamente a los datos es usando el portapapeles. Suponiendo que los datos estan en una hoja de cálculos:</p>
 <ol style="list-style-type: decimal">
 <li><p>Seleccionar el rango de celdas que nos interesa incluyendo los encabezados</p></li>
@@ -295,6 +314,7 @@ prueba &lt;- read.xlsx(&quot;prueba.xlsx&quot;, sheetIndex = 1)</code></pre>
 <li><p>Luego en R</p></li>
 </ol>
 <pre class="r"><code>datos &lt;- read.table(&quot;clipboard&quot;)</code></pre>
+<p><strong>Aclaración</strong>: si bien esta alternativa es rápida, al no ser reproducible (no hay forma de plasmarla en el script para futuras seciones), no es recomendable.</p>
 </div>
 
 

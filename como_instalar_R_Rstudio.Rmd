@@ -1,0 +1,54 @@
+---
+title: "¿Cómo crear un proyecto en RStudio?"
+output: html_document
+---
+
+```{r, include = F}
+library(knitr)
+```
+
+## ¿Cómo instalar R y RStudio?
+
+R y RStudio se instalan por separado. R puede funcionar sin RStudio, en cambio éste necesita que al menos una versión de R esté instalada en el sistema. Ambos softwares son multiplataforma y pueden ser ejecutados en sistemas operativos Windows, OS X  y Linux. En la página [https://cloud.r-project.org/](https://cloud.r-project.org/) hay instrucciones específicas para cada plataforma. A continuación se describe el procedimiento para instalar R y RStudio bajo Windows.
+
+### Instalación de R
+
+1) Descargar el archivo instalador correspondiente a la última versión estable de R desde el CRAN[^1] (del inglés, _Comprenhensive R Archive Network_) visitando el siguiente [link](https://cloud.r-project.org/bin/windows/base/release.htm). 
+
+```{r, echo = F, fig.cap = 'Página de descaga de R', out.width = '75%', fig.align = 'center', fig.pos= 'h', out.extra=''} 
+include_graphics('images/choose_OS.png', auto_pdf = T)
+```
+
+[^1]: CRAN se compone de un conjunto de servidores espejo distribuidos alrededor del mundo que tienen copias de R y sus paquetes. No es necesario escojer el espejo más cercano ya que el espejo nube (https://cloud.r-project.org) automáticamente determina de que servidor conviene realizar la descarga.
+
+2) Ejecutar el archivo descargado [^2] y seguir el asistente de instalación con todas las opciones por defecto. 
+
+[^2]: Al momento de escribir estas instrucciones la última versión estable de R era la 3.5.1 "Feather Spray", por lo tanto el link apuntará al archivo `R-3.5.1-win.exe`. 
+
+3) Si la instalación ha sido exitosa en el menú _Inicio_ podrá encontrarse la carpeta _R_ que contendrá dos accesos directos a la interfase de usuario mínima que viene con la versión de R para Windows.
+
+```{r, echo = F, fig.cap = 'R GUI para Windows', out.width = '75%', fig.align = 'center', fig.pos= 'h', out.extra=''} 
+include_graphics('images/rgui.png', auto_pdf = T)
+```
+
+### Instalación de RStudio
+
+1) Ir al sitio web de descarga de RStudio [https://www.rstudio.com/products/rstudio/download/](https://www.rstudio.com/products/rstudio/download/)
+
+```{r, echo = F, out.width = "75%", fig.align = 'center', fig.cap = 'Página principal de RStudio', fig.pos= 'h', out.extra=''}
+knitr::include_graphics("images/rstudio_download.png", auto_pdf = T)
+```
+
+2) Descargar el archivo de instalación correspondiente a nuestra plataforma o sistema operativo. 
+
+```{r, echo = F, out.width = "75%", fig.align = 'center', fig.cap = 'Página principal de RStudio', fig.pos= 'h', out.extra=''}
+knitr::include_graphics("images/rstudio_download_OS.png", auto_pdf = T)
+```
+
+3) Ejecutar el archivo `.exe` [^3] y seguir el asistente de instalación con todas las opciones por defecto.
+
+[^3]: Al momento de escribir estas instrucciones la última versión estable de RStudio era  `RStudio-1.1.453.exe`. 
+
+4) Si la instalación ha sido exitosa en el menú _Inicio_ dentro de la carpeta _RStudio_  se encontrará el acceso directo a RStudio el cual, mediante el menu contextual (botón derecho del ratón) puede enviarse al Escritorio como acceso directo o bien anclar al menu de Inicio o barra de acceso rápido.
+   
+Ahora sí, ya tenemos listo R y RStudio para empezar a trabajar!!
