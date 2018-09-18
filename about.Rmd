@@ -3,4 +3,7 @@ title: "Acerca de"
 output: html_document
 ---
 
-Prueba
+Bio
+
+Este sitio contiene tutoriales de R destinados a los alumnos de Estadística 1 y 2 de las carrera de Agronomía de la Facultad de Ciencias Agrarias de la Universidad Nacional del Litoral.
+

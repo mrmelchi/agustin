@@ -9,14 +9,13 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Agustín Alesso" />
 
 
 <title>¿Cómo crear un proyecto en RStudio?</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -72,6 +71,7 @@ h6 {
 }
 </style>
 
+<link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
 
@@ -106,34 +106,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 64px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 </style>
 
@@ -192,17 +192,13 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="about.html">
-    <span class="fa fa-info"></span>
-     
-    About
-  </a>
+  <a href="about.html">por Agustín Alesso</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-gear"></span>
+    <span class="fa fa-book"></span>
      
-    More
+    Tutoriales
      
     <span class="caret"></span>
   </a>
@@ -211,15 +207,16 @@ $(document).ready(function () {
       <a href="como_crear_proyecto_rstudio.html">¿Cómo crear un proyecto en Rstudio?</a>
     </li>
     <li>
-      <a href="como_importar_datos_en_R.html">Page B</a>
-    </li>
-    <li class="divider"></li>
-    <li class="dropdown-header">Heading 2</li>
-    <li>
-      <a href="como_instalar_y_cargar_paquetes.html">Page C</a>
+      <a href="como_importar_datos_en_R.html">¿Cómo importar datos en R?</a>
     </li>
     <li>
-      <a href="Introducción_a_dplyr.html">Page D</a>
+      <a href="como_instalar_y_cargar_paquetes.html">¿Cómo instalar y cargar paquetes?</a>
+    </li>
+    <li>
+      <a href="Introducción_a_dplyr.html">Introducción a dplyr</a>
+    </li>
+    <li>
+      <a href="Introducción_a_dplyr.html">Introducción a ggplot2</a>
     </li>
   </ul>
 </li>
@@ -241,33 +238,27 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">¿Cómo crear un proyecto en RStudio?</h1>
-<h4 class="author"><em>Agustín Alesso</em></h4>
 
 </div>
 
 
-<div id="uno" class="section level1">
-<h1>Uno</h1>
-<p>Antes de comenzar es conveniente crear un proyecto dentro de <strong>R Studio</strong>. Esto permitirá organizar los archivos de datos, las salidas, los scripts, etc dentro de un directorio de trabajo (<em>working directory</em>) y volver a ellos de manera más rápida y eficiente.</p>
+<div id="proyecto" class="section level3">
+<h3>Proyecto</h3>
+<p>R trabaja con un directorio de trabajo o <em>working directory</em> que es la dirección o <em>path</em> que figura en el titulo del panel <strong>Console</strong>. Por defecto es el directorio base del usuario que depende de cada plataforma. En linux es el <code>/home/usuario</code> en cambio en Windows es <code>C:/Users/usuario/Documents</code>. A menos que se especifique lo contrario, se asume que los archivos de entrada o salida se ubican en dicha carpeta. Esto se puede modificar en cualquier momento con la función <code>setwd()</code>.</p>
+<p>RStudio extiende esta característica a través de los proyectos o <em>projects</em>. Cada proyecto es una carpeta o <em>folder</em> que contienen un archivo <code>.RProj</code> con algunas configuraciones específicas. Al abrirlo en RStudio, automáticamente se cambia el directorio de trabajo a esta carpeta. Esto permite organizar los archivos de datos, las salidas, los scripts, etc., dentro de un directorio de trabajo (<em>working directory</em>) y volver a ellos de manera más rápida, eficiente, y portable.</p>
+<p>Para crear un proyecto:</p>
 <ol style="list-style-type: decimal">
-<li>Ir a <code>File &gt; New project...</code> o bien el ícono <code>New project</code>.</li>
+<li>Ir a <code>File &gt; New project...</code> o bien el ícono <code>Create project</code> de la barra de herramientas.</li>
 </ol>
-<p><img src="screenshots/new_project.png" /></p>
+<p><img src="images/new_project.png" width="75%"  style="display: block; margin: auto;" /></p>
 <ol start="2" style="list-style-type: decimal">
-<li>Luego seleccionar <code>New directory</code> y <code>Empty project</code></li>
+<li>Seleccionar <code>New Directory</code> y en <code>Project type</code> seleccionar <code>New project</code>.</li>
 </ol>
-<p><img src="screenshots/new_project1.png" /></p>
-<p><img src="screenshots/new_project2.png" /></p>
+<p><img src="images/new_project1.png" width="75%"  style="display: block; margin: auto;" /><img src="images/new_project2.png" width="75%"  style="display: block; margin: auto;" /></p>
 <ol start="3" style="list-style-type: decimal">
-<li>Una vez en el cuadro de diálogo <code>Create new project</code></li>
+<li>Una vez en el cuadro de diálogo <code>Create new project</code> ingresar el nombre del proyecto (e.g. <code>DOE</code>) en <code>Directory name</code> que será a su vez el nombre de la carpeta que RStudio va a crear por nosotros. Luego en <code>Create project as a subdirectory of</code> indicar <em>donde</em> queremos que Rstudio cree la carpeta.</li>
 </ol>
-<p><img src="screenshots/new_project3.png" /></p>
-<p>En <code>Directory name</code> ingresamos el nombre del proyecto (e.g. Est-II) que será a su vez el nombre de la carpeta que <strong>RStudio</strong> va a crear.</p>
-<p>Luego en <code>Create project as a subdirectory of</code> vamos indicar <strong>donde</strong> queremos que <strong>Rstudio</strong> cree la carpeta. Aquí hay dos opciones:</p>
-<ul>
-<li><p>Si van a trabajar siempre en su notebook/netbook, pueden elegir una carpeta donde les convenga.</p></li>
-<li><p>Si van a usar las máquinas del gabinete durante el práctico y luego trabajarán en su casa, puede ser convenienete crear esa carpeta en disco removible o pendrive. De este modo, cuando vienen al práctico lo traen y trabajan directamente sobre el proyecto.</p></li>
-</ul>
+<p><img src="images/new_project3.png" width="75%"  style="display: block; margin: auto;" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>Si todo sale bien, se crea la carpeta con el nombre que indicamos y dentro de ésta un archivo con extensión <code>.Rproj</code></li>
 </ol>

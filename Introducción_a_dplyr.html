@@ -16,7 +16,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -75,6 +75,7 @@ h6 {
 }
 </style>
 
+<link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
 
@@ -109,34 +110,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 64px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 </style>
 
@@ -290,17 +291,13 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="about.html">
-    <span class="fa fa-info"></span>
-     
-    About
-  </a>
+  <a href="about.html">por Agustín Alesso</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-gear"></span>
+    <span class="fa fa-book"></span>
      
-    More
+    Tutoriales
      
     <span class="caret"></span>
   </a>
@@ -309,15 +306,16 @@ div.tocify {
       <a href="como_crear_proyecto_rstudio.html">¿Cómo crear un proyecto en Rstudio?</a>
     </li>
     <li>
-      <a href="como_importar_datos_en_R.html">Page B</a>
-    </li>
-    <li class="divider"></li>
-    <li class="dropdown-header">Heading 2</li>
-    <li>
-      <a href="como_instalar_y_cargar_paquetes.html">Page C</a>
+      <a href="como_importar_datos_en_R.html">¿Cómo importar datos en R?</a>
     </li>
     <li>
-      <a href="Introducción_a_dplyr.html">Page D</a>
+      <a href="como_instalar_y_cargar_paquetes.html">¿Cómo instalar y cargar paquetes?</a>
+    </li>
+    <li>
+      <a href="Introducción_a_dplyr.html">Introducción a dplyr</a>
+    </li>
+    <li>
+      <a href="Introducción_a_dplyr.html">Introducción a ggplot2</a>
     </li>
   </ul>
 </li>
@@ -858,16 +856,16 @@ muestra50</code></pre>
 <pre><code>## # A tibble: 50 x 10
 ##    IDV   Procedencia Sexo  `Fecha Ingreso`     Categoria
 ##    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;dttm&gt;              &lt;chr&gt;    
-##  1 OQ15… Las Glicin… Macho 2017-06-06 00:00:00 Ternero  
-##  2 MM42… La Alameda  Macho 2017-07-22 00:00:00 Ternero  
-##  3 SZ20… Las Glicin… Macho 2017-07-20 00:00:00 Ternero  
-##  4 OH87… La Alameda  Macho 2017-07-23 00:00:00 Ternero  
-##  5 MM42… La Alameda  Macho 2017-07-21 00:00:00 Ternero  
-##  6 SZ20… Las Glicin… Macho 2017-07-24 00:00:00 Ternero  
-##  7 PO15… Los Corral… Macho 2017-07-21 00:00:00 Ternero  
-##  8 IA67… La Alameda  Macho 2017-07-24 00:00:00 Ternero  
-##  9 OH87… La Alameda  Macho 2017-07-24 00:00:00 Ternero  
-## 10 MM42… La Alameda  Macho 2017-06-14 00:00:00 Ternero  
+##  1 NS50… Los Corral… Macho 2017-07-20 00:00:00 Ternero  
+##  2 SZ20… Las Glicin… Macho 2017-07-24 00:00:00 Ternero  
+##  3 IY73… La Rosita   Macho 2017-07-20 00:00:00 Ternero  
+##  4 SZ20… Las Glicin… Macho 2017-07-24 00:00:00 Ternero  
+##  5 SZ20… Las Glicin… Macho 2017-07-21 00:00:00 Ternero  
+##  6 PO15… Los Corral… Macho 2017-07-24 00:00:00 Ternero  
+##  7 IA67… La Segunda  Macho 2017-07-24 00:00:00 Ternero  
+##  8 SZ20… Las Glicin… Macho 2017-07-21 00:00:00 Ternero  
+##  9 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
+## 10 SZ20… Las Glicin… Macho 2017-07-24 00:00:00 Ternero  
 ## # ... with 40 more rows, and 5 more variables: Fecha &lt;dttm&gt;, Hora &lt;dttm&gt;,
 ## #   Peso &lt;dbl&gt;, log_peso &lt;dbl&gt;, peso2 &lt;dbl&gt;</code></pre>
 <pre class="r"><code># Una muestra de 10 novillos de cada procedencia
@@ -879,16 +877,16 @@ muestra_procedencia</code></pre>
 ## # Groups:   Procedencia [7]
 ##    IDV   Procedencia Sexo  `Fecha Ingreso`     Categoria
 ##    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;dttm&gt;              &lt;chr&gt;    
-##  1 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
-##  2 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
-##  3 GH73… Don Alberto Macho 2017-07-22 00:00:00 Ternero  
-##  4 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
-##  5 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
-##  6 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
-##  7 GH73… Don Alberto Macho 2017-07-22 00:00:00 Ternero  
-##  8 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
-##  9 GH73… Don Alberto Macho 2017-07-23 00:00:00 Ternero  
-## 10 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
+##  1 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
+##  2 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
+##  3 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
+##  4 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
+##  5 GH73… Don Alberto Macho 2017-07-20 00:00:00 Ternero  
+##  6 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
+##  7 GH73… Don Alberto Macho 2017-07-24 00:00:00 Ternero  
+##  8 GH73… Don Alberto Macho 2017-07-22 00:00:00 Ternero  
+##  9 GH73… Don Alberto Macho 2017-06-16 00:00:00 Ternero  
+## 10 GH73… Don Alberto Macho 2017-07-23 00:00:00 Ternero  
 ## # ... with 60 more rows, and 5 more variables: Fecha &lt;dttm&gt;, Hora &lt;dttm&gt;,
 ## #   Peso &lt;dbl&gt;, log_peso &lt;dbl&gt;, peso2 &lt;dbl&gt;</code></pre>
 </div>
