@@ -1,8 +1,28 @@
-name: "my-website"
+name: "Tutoriales R | FCA-UNL"
 navbar:
-  title: "My Website"
+  title: "Tutoriales R"
   left:
     - text: "Home"
+      icon: fa-home
       href: index.html
+    - text: "About"
+      icon: fa-info
+      href: about.html
+    - text: "More"
+      icon: fa-gear
+      menu:
+        - text: "¿Cómo crear un proyecto en Rstudio?"
+          href: como_crear_proyecto_rstudio.html
+        - text: "Page B"
+          href: como_importar_datos_en_R.html
+        - text: "---------"
+        - text: "Heading 2"
+        - text: "Page C"
+          href: como_instalar_y_cargar_paquetes.html
+        - text: "Page D"
+          href: Introducción_a_dplyr.html
+  right:
+    - icon: fa-question fa-lg
+      href: https://example.com
 output_dir: "."
     
