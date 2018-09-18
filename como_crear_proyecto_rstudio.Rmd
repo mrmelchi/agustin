@@ -7,11 +7,13 @@ output: html_document
 library(knitr)
 ```
 
-### Proyecto
+## ¿Qué es un Proyecto?
 
 R trabaja con un directorio de trabajo o _working directory_ que es la dirección o _path_ que figura en el titulo del panel **Console**. Por defecto es el directorio base del usuario que depende de cada plataforma. En linux es el `/home/usuario` en cambio en Windows es `C:/Users/usuario/Documents`. A menos que se especifique lo contrario, se asume que los archivos de entrada o salida se ubican en dicha carpeta. Esto se puede modificar en cualquier momento con la función `setwd()`. 
 
 RStudio extiende esta característica a través de los proyectos o _projects_. Cada proyecto es una carpeta o _folder_ que contienen un archivo `.RProj` con algunas configuraciones específicas. Al abrirlo en RStudio, automáticamente se cambia el directorio de trabajo a esta carpeta. Esto permite organizar los archivos de datos, las salidas, los scripts, etc., dentro de un directorio de trabajo (_working directory_) y volver a ellos de manera más rápida, eficiente, y portable.
+
+## ¿Cómo crar un proyecto?
 
 Para crear un proyecto: 
 
