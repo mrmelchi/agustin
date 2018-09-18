@@ -1,6 +1,5 @@
 ---
 title: "¿Cómo importar datos en R?"
-author: "Agustín Alesso"
 output: html_document
 ---
 

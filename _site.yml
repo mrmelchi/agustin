@@ -2,7 +2,7 @@ name: "Tutoriales R | FCA-UNL"
 navbar:
   title: "Tutoriales R"
   left:
-    - text: "Tutoriales"
+    - text: "Contenidos"
       icon: fa-book
       menu:
         - text: "¿Cómo instalar R y RStudio?"
