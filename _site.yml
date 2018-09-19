@@ -14,9 +14,9 @@ navbar:
         - text: "¿Cómo importar datos en R?"
           href: como_importar_datos_en_R.html
         - text: "Introducción a dplyr"
-          href: Introducción_a_dplyr.html
+          href: introduccion_a_dplyr.html
         - text: "Introducción a ggplot2"
-          href: Introducción_a_ggplot2.html
+          href: introduccion_a_ggplot2.html
   right:
     - text: "por Agustín Alesso"
       href: about.html
