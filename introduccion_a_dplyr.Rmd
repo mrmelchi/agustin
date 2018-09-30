@@ -237,7 +237,7 @@ terneros %>%
   select(IDV)
 ```
 
-### Resmuir datos
+### Resumir datos
 
 Mediante `summarise()` se pueden aplicar funciones para resumir en un solo valor los valores de las columnas. Las funciones a aplicar deben devolver un único valor, por ejemplo `mean()`. Si usamos `summary()` esto devolverá 6 valores y dará error.
 
